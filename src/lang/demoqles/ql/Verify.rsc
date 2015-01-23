@@ -5,6 +5,11 @@ import lang::demoqles::ql::Flatten;
 import lang::demoqles::ql::Bind;
 import lang::demoqles::ql::Check; // for use/def
 
+import lang::smtlib2::theory::core::Ast;
+import lang::smtlib2::theory::ints::Ast;
+import lang::smtlib2::command::Ast;
+import lang::smtlib2::\solve::Z3;
+
 import Set;
 import IO;
 import ParseTree;
@@ -22,20 +27,22 @@ import Message;
  
 */
 
-//void testSMT() {
-//  pt = parse(#start[Form], |project://demoqles/input/tax.dql|);
-//  <f, ds> = definitions(pt.top);
-//  f = bind(f, ds);
-//  l = |file:///tmp/tax.smt2|;
-//  if (detectCycles(f) != {}) {
-//    println("Cycles");
-//  }
-//  else {
-//    for (e <- verifyForm(f, l)) {
-//      println(e);
-//    }
-//  }
-//}
+void testSMT() {
+  pt = parse(#start[Form], |project://demoqles/input/errors.dql|);
+  <f, ds> = definitions(pt.top);
+  f = bind(f, ds);
+  l = |file:///tmp/tax.smt2|;
+  Script scr = script(qs2smt(sort(flatten(f))));
+  iprintln(verifyForm(f, |file:///|));
+  //if (detectCycles(f) != {}) {
+  //  println("Cycles");
+  //}
+  //else {
+  //  for (e <- verifyForm(f, l)) {
+  //    println(e);
+  //  }
+  //}
+}
 
 str SOLVER_PATH = "/usr/local/bin/z3";
 
@@ -45,102 +52,41 @@ set[Message] verifyForm(Form f, loc tempfile) {
   if (!exists(|file://<SOLVER_PATH>|)) {
     return {warning("Solver does not exist at <SOLVER_PATH>", f.name@\loc)};
   }
-  qs = sort(flatten(f));
-  smt = qs2smt(qs);
-  ds = form2nonDetChecks(f);
-  rs = form2reachabilityChecks(f);
-  us = form2undefinedChecks(f);
-  nonDet = checkScopes(ds);
-  reach = checkScopes(rs);
-  undef = checkScopes(us);
+  
+  pid = startZ3(pathToZ3 = "/usr/local");
+  spec = script(qs2smt(sort(flatten(f)))); 
+  run(pid, spec, debug=true);
+  
+  errs = {};
+  
+  errs += { warning("Unreachable", q@\loc) | /Question q := f, q has var, 
+               !check(pid, [\assert(var(qVisible(q)))]) };
 
-  output = runSMTsolver(tempfile, "<smt>\n<nonDet>\n<reach>\n<undef>");
-  // TODO: check output for well-formedness.
-  results = parseOutput(output); 
-  j = 0;
-  set[Message] errs = {};
-  for (i <- [0..size(ds)]) {
-    errs += { warning("Non-deterministic", q@\loc) | q <- ds[i][1], results[j] == "sat" };
-    j += 1;
+
+  vq = { <q.var, q> | /Question q := f, q has var };
+  for (v <- domain(vq), size(vq[v]) > 1) {
+    <q0, qs> = takeOneFrom(vq[v]);
+    excl = ( var(qVisible(q0)) | xor(var(qVisible(q2)),  it) | q2 <- qs );
+    
+    errs += { warning("Non-deterministic", subject@\loc) |  
+               check(pid, [\assert(not(excl))]), subject <- vq[v] };
   }
-  for (i <- [0..size(rs)]) {
-    errs += { warning("Unreachable", rs[i][1]@\loc) | results[j] == "unsat" };
-    j += 1;
-  }
-  for (i <- [0..size(us)]) {
-    errs += { warning("Possibly undefined use", us[i][1]@\loc) | results[j] == "sat" };
-    j += 1;
-  }
+
+  stopZ3(pid);
+
   return errs;
-}
-
-list[str] parseOutput(str output) {
-  r = [];
   
-  while (/^<result:(un)?sat>/ := output) {
-    r += [result];
-    output = output == result ? "" : output[size(result)..];
-  }
-  
-  return r;
 }
-
-str runSMTsolver(loc tmpfile, str input) {
-  pid = createProcess(SOLVER_PATH, ["-smt2", "-nw", "-in"]);
-  writeFile(tmpfile, input);
-  writeTo(pid, "<input>\n(exit)\n");
-  x = trim(readEntireStream(pid));
-  killProcess(pid);
-  return x;
-}
-
-str checkScopes(lrel[str, &T] as)
-  = intercalate("\n", [ "(push)\n<a>\n(check-sat)\n(pop)" | <a, _> <- as] );
 
 str qName(str n, loc l) = "<n>_<l.offset>";
 str qName(Question q) = qName("<q.var>", q@\loc);
 str qVisible(Question q) = "<qName(q)>_visible";
 
-lrel[str, set[Question]] form2nonDetChecks(Form f) {
-  vq = { <q.var, q> | /Question q := f, q has var };
-  as = [];
-  for (v <- domain(vq), size(vq[v]) > 1) {
-    <q0, qs> = takeOneFrom(vq[v]);
-    xor = ( "<qName(q0)>_visible" | "(xor <qName(q2)>_visible <it>)" | q2 <- qs );
-    as += [<"(assert (not <xor>))", vq[v]>];
-  }
-  return as;
-}
 
-lrel[str, Question] form2reachabilityChecks(Form f) 
-  = [ <"(assert <qName(q)>_visible)", q> | /Question q := f, q has var  ];
-  
-lrel[str, Question] form2undefinedChecks(Form f) {
-  // TODO: factor out in cycle check.
-  rel[str, loc] uses(Question q) 
-    = { <"<x>", l> | /e:(Expr)`<Id x>` := q, l <- e@links };
-  checks = [];
-  top-down visit (f) {
-    case q:(Question)`<Label l> <Var n>: <Type t> = <Expr e>`: {
-      us = uses(q);
-      conjs = for (x <- domain(us)) {
-        <l0, ls> = takeOneFrom(us[x]);
-        // TODO: this could use qName/qVisible...
-        // A variable x is visible if any of its question occurrences
-        // is visible.
-        xvis =  ( "<x>_<l0.offset>_visible" 
-                | "(or <it> <x>_<l.offset>_visible)" | loc l <- ls );
-        append xvis;
-      }
-      // if q (occ) is visible, it's used variables should be
-      // visible (=> q_visible (AND (or ...) (or ...)))
-      if (conjs != []) {
-        conj = ( conjs[0] | "(and <it> <c>)" | c <- /*conjs[1..]*/ tail(conjs) );
-        checks += [<"(assert (not (=\> <qVisible(q)> <conj>)))", q>];
-      }
-    }
-  }
-  return checks;
+bool check(int z3Pid, list[Command] commands) {
+    commands = [push(1), *commands, checkSatisfiable(), pop(1)];
+    result = run(z3Pid, script(commands), debug=true);
+    return /sat() := result;
 }
 
 // NB: does not terminate if cyclic dependencies.
@@ -162,52 +108,53 @@ list[Question] sort(list[Question] qs) {
 
 
 // requires bind
-str qs2smt(list[Question] qs) = intercalate("\n", [ ifthen2smt(q) | q <- qs ]); 
+list[Command] qs2smt(list[Question] qs) = ( [] | it + ifthen2smt(q) | q <- qs ); 
 
-str ifthen2smt((Question)`if (<Expr c>) <Question q>`)
-  = "(define-fun <qName(q)>_visible () Bool <expr2smt(c)>)\n"
+list[Command] ifthen2smt((Question)`if (<Expr c>) <Question q>`)
+  = [defineFunction("<qName(q)>_visible", [], \bool(), expr2smt(c))]
   + question2smt(q);
 
+list[Command] question2smt(q:(Question)`<Label l> <Var v>: <Type t>`)
+  = [declareFunction(qName(q), [], type2smt(t))];
 
-str question2smt(q:(Question)`<Label l> <Var v>: <Type t>`)
-  = "(declare-const <qName(q)> <type2smt(t)>)";
+list[Command] question2smt(q:(Question)`<Label l> <Var v>: <Type t> = <Expr e>`)
+  = [defineFunction(qName(q), [], type2smt(t), expr2smt(e))];
 
-str question2smt(q:(Question)`<Label l> <Var v>: <Type t> = <Expr e>`)
-  = "(define-fun <qName(q)> () <type2smt(t)> <expr2smt(e)>)";
+Sort type2smt((Type)`boolean`) = \bool();
+Sort type2smt((Type)`integer`) = \int();
+// todo!!!
+Sort type2smt((Type)`string`) = \int();
+Sort type2smt((Type)`money`) = \int();
 
-str type2smt((Type)`boolean`) = "Bool";
-str type2smt((Type)`integer`) = "Int";
-str type2smt((Type)`string`) = "(Array Int Int)";
-str type2smt((Type)`money`) = "Real";
-default str type2smt(Type t) { throw "Unsupported type: <t>"; }
+default Sort type2smt(Type t) { throw "Unsupported type: <t>"; }
 
 
-str expr2smt(e:(Expr)`<Id x>`) {
+Expr expr2smt(e:(Expr)`<Id x>`) {
   qLocs = e@links;
   str varAt(loc l) = "<x>_<l.offset>";
   <q, qLocs> = takeOneFrom(qLocs);
-  return ( varAt(q) | "(ite <v>_visible <v> <it>)" | l <- qLocs, v := varAt(l) );
+  return ( var(varAt(q)) | ite(var("<v>_visible"), var(v), it) | l <- qLocs, v := varAt(l) );
 }
  
-str expr2smt((Expr)`(<Expr e>)`) = "<expr2smt(e)>";
-str expr2smt((Expr)`<Integer x>`) = "<x>.0";
-str expr2smt((Expr)`true`) = "true";
-str expr2smt((Expr)`false`) = "false";
+Expr expr2smt((Expr)`(<Expr e>)`) = expr2smt(e);
+Expr expr2smt((Expr)`<Integer x>`) = lit(intVal(toInt("<x>")));
+Expr expr2smt((Expr)`true`) = lit(\true());
+Expr expr2smt((Expr)`false`) = lit(\false());
 
-str expr2smt((Expr)`!<Expr e>`) = "(not <expr2smt(e)>)";
-str expr2smt((Expr)`<Expr lhs> * <Expr rhs>`) = "(* <expr2smt(lhs)> <expr2smt(rhs)>)";
-str expr2smt((Expr)`<Expr lhs> / <Expr rhs>`) = "(/ <expr2smt(lhs)> <expr2smt(rhs)>)";
-str expr2smt((Expr)`<Expr lhs> + <Expr rhs>`) = "(+ <expr2smt(lhs)> <expr2smt(rhs)>)";
-str expr2smt((Expr)`<Expr lhs> - <Expr rhs>`) = "(- <expr2smt(lhs)> <expr2smt(rhs)>)";
-str expr2smt((Expr)`<Expr lhs> \> <Expr rhs>`) = "(\> <expr2smt(lhs)> <expr2smt(rhs)>)";
-str expr2smt((Expr)`<Expr lhs> \>= <Expr rhs>`) = "(\>= <expr2smt(lhs)> <expr2smt(rhs)>)";
-str expr2smt((Expr)`<Expr lhs> \< <Expr rhs>`) = "(\< <expr2smt(lhs)> <expr2smt(rhs)>)";
-str expr2smt((Expr)`<Expr lhs> \<= <Expr rhs>`) = "(\<= <expr2smt(lhs)> <expr2smt(rhs)>)";
-str expr2smt((Expr)`<Expr lhs> == <Expr rhs>`) = "(= <expr2smt(lhs)> <expr2smt(rhs)>)";
-str expr2smt((Expr)`<Expr lhs> != <Expr rhs>`) = "(not (= <expr2smt(lhs)> <expr2smt(rhs)>))";
-str expr2smt((Expr)`<Expr lhs> && <Expr rhs>`) = "(and <expr2smt(lhs)> <expr2smt(rhs)>)";
-str expr2smt((Expr)`<Expr lhs> || <Expr rhs>`) = "(or <expr2smt(lhs)> <expr2smt(rhs)>)";
+Expr expr2smt((Expr)`!<Expr e>`) = not(expr2smt(e));
+Expr expr2smt((Expr)`<Expr lhs> * <Expr rhs>`) = mul(expr2smt(lhs), expr2smt(rhs));
+Expr expr2smt((Expr)`<Expr lhs> / <Expr rhs>`) = div(expr2smt(lhs), expr2smt(rhs));
+Expr expr2smt((Expr)`<Expr lhs> + <Expr rhs>`) = add(expr2smt(lhs), expr2smt(rhs));
+Expr expr2smt((Expr)`<Expr lhs> - <Expr rhs>`) = sub(expr2smt(lhs), expr2smt(rhs));
+Expr expr2smt((Expr)`<Expr lhs> \> <Expr rhs>`) = gt(expr2smt(lhs), expr2smt(rhs));
+Expr expr2smt((Expr)`<Expr lhs> \>= <Expr rhs>`) = gte(expr2smt(lhs), expr2smt(rhs));
+Expr expr2smt((Expr)`<Expr lhs> \< <Expr rhs>`) = lt(expr2smt(lhs), expr2smt(rhs));
+Expr expr2smt((Expr)`<Expr lhs> \<= <Expr rhs>`) = lte(expr2smt(lhs), expr2smt(rhs));
+Expr expr2smt((Expr)`<Expr lhs> == <Expr rhs>`) = eq(expr2smt(lhs), expr2smt(rhs));
+Expr expr2smt((Expr)`<Expr lhs> != <Expr rhs>`) = not(eq(expr2smt(lhs), expr2smt(rhs)));
+Expr expr2smt((Expr)`<Expr lhs> && <Expr rhs>`) = and(expr2smt(lhs), expr2smt(rhs));
+Expr expr2smt((Expr)`<Expr lhs> || <Expr rhs>`) = or(expr2smt(lhs), expr2smt(rhs));
 
-default str expr2smt(Expr e) { throw "Expression <e> not supported"; }
+default Expr expr2smt(Expr e) { throw "Expression <e> not supported"; }
 
 

@@ -52,18 +52,21 @@ str question2item(Question q)
     '  <question2html(q)>
     '\</li\>";
 
-str question2html(Question q) 
-  = labeledWidget(q, inputWidget(qName(q), "checkbox", "checked: <qName(q)>"))
-  when (Type)`boolean` := q.\type;  
+str question2html(Question q, bool label = true) 
+  = labeledWidget(q, inputWidget(qName(q), "checkbox", "checked: <qName(q)>"), label = label)
+  when (Type)`boolean` := q.\type,
+    bprintln("1 Label = <label>");  
 
-default str question2html(Question q) = // ignore type for now 
-  labeledWidget(q, inputWidget(qName(q), "text", "value: <qName(q)>"));
+default str question2html(Question q, bool label = true) = // ignore type for now 
+  labeledWidget(q, inputWidget(qName(q), "text", "value: <qName(q)>"), label = label)
+  when bprintln("2 Label = <label>");
 
 str inputWidget(str name, str tipe, str bind) 
   = "\<input name=\"<name>\" id=\"<name>\" type=\"<tipe>\" data-bind=\"<bind>\" /\>";
 
-str labeledWidget(Question q, str w) 
-  = "\<label for=\"<qName(q)>\"\><qLabel(q)>\</label\>\n<w>";
+str labeledWidget(Question q, str w, bool label = true) 
+  = label ? "\<label for=\"<qName(q)>\"\><qLabel(q)>\</label\>\n<w>" : w
+  when bprintln("3 LAbel = <label>");
 
 
 

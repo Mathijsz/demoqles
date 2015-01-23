@@ -6,6 +6,7 @@ import lang::demoqles::ql::Form2Model;
 import List;
 import ParseTree;
 import String;
+import IO;
 
 /*
  Presupposes normalization which has the questions inlined into 
@@ -72,14 +73,15 @@ str rule2html((Rule)`{<Rule* rs>}`, int level)
   = ( "" | it + rule2html(r, level) + "\n" | r <- rs );
   
 str rule2html((Rule)`section <String t> <Rule r>`, int level)
-  = "\<h<level>\><t>\</h<level>\>
-    '<rule2html(r, level + 1)>";
+  = "\<h<level>\><h>\</h<level>\>
+    '<rule2html(r, level + 1)>"
+  when str h := "<t>"[1..-1];
   
 str rule2html((Rule)`<Question q> {widget <WidgetType w> <Style* ys>}`, int level)
   = condP(q, span((Style)`{<Style* ys>}`, widget2widget(w, q)));  
   
 default str rule2html((Rule)`<Question q> <Style y>`, int _)
-  = condP(q, span(y, question2html(q)));
+  = condP(q, span(y, question2html(q, label = false)));
 
 str widget2widget((WidgetType)`slider(<Integer a>, <Integer b>, <Integer c>)`, Question q)
   = "\<input type=\"range\" min=\"<a>\" max=\"<b>\" step=\"<c>\"
@@ -91,22 +93,22 @@ str widget2widget((WidgetType)`spinbox`, Question q)
     '   name=\"<qName(q)>\" id=\"<qName(q)>\" /\>";
   
 str widget2widget((WidgetType)`radio(<String yes>, <String no>)`, Question q)
-  = "\<div\>
-    '  \<input type=\"radio\" name=\"<qName(q)>\" id=\"<qName(q)>\" 
+  = "\<input type=\"radio\" name=\"<qName(q)>\" id=\"<qName(q)>\" 
     '     value=\"true\" data-bind=\"checked: <qName(q)>\"  /\>
-    '    <yes>
-    '\</div\>
-    '\<div\>
-    '  \<input type=\"radio\" name=\"<qName(q)>\" id=\"<qName(q)>\" 
+    '    <syes>
+    '\<input type=\"radio\" name=\"<qName(q)>\" id=\"<qName(q)>\" 
     '     value=\"\" data-bind=\"checked: <qName(q)>\" /\>
-    '    <no>
-    '\</div\>";
+    '    <sno>"
+  when 
+    str syes := "<yes>"[1..-1],
+    str sno := "<no>"[1..-1];
   
 default str widget2widget(WidgetType _, Question q)
-  = question2html(q);  // FIXME: label is output twice...
+  = question2html(q, label = false)
+  when bprintln("Setting label = false");
   
 str condP(Question q, str x) = 
-  "\<p data-bind=\"visible: <qName(q)>_visible\"\><q.label>&nbsp;<x>\</p\>"; 
+  "\<p data-bind=\"visible: <qName(q)>_visible\"\><qLabel(q)>&nbsp;<x>\</p\>"; 
   
 str span(Style y, str s) = "\<span style=\"<style2css(y)>\"\><s>\</span\>";
 
