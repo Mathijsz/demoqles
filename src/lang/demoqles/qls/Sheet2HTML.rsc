@@ -104,8 +104,7 @@ str widget2widget((WidgetType)`radio(<String yes>, <String no>)`, Question q)
     str sno := "<no>"[1..-1];
   
 default str widget2widget(WidgetType _, Question q)
-  = question2html(q, label = false)
-  when bprintln("Setting label = false");
+  = question2html(q, label = false);
   
 str condP(Question q, str x) = 
   "\<p data-bind=\"visible: <qName(q)>_visible\"\><qLabel(q)>&nbsp;<x>\</p\>"; 

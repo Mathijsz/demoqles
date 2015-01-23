@@ -2,7 +2,7 @@ stylesheet taxOfficeExample
   page Housing {
     section "Buying"
       question hasBoughtHouse  
-        widget checkbox 
+        widget spinbox 
     section "Loaning"  
       question hasMaintLoan
   }

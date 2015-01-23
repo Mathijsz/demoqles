@@ -5,33 +5,46 @@
     <link rel="stylesheet" type="text/css" href="file:///Users/tvdstorm/CWI/muql/src/lang/demoqles/basic.css" />
   </head>
   <body>
-    <ul>
-  <li data-bind="visible: hasSoldHouse_27_visible">
-    <label for="hasSoldHouse_27">Did you sell a house in 2010?</label>
-    <input name="hasSoldHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
-  </li>
-  <li data-bind="visible: hasBoughtHouse_87_visible">
-    <label for="hasBoughtHouse_87">Did you buy a house in 2010?</label>
-    <input name="hasBoughtHouse_87" id="hasBoughtHouse_87" type="checkbox" data-bind="checked: hasBoughtHouse_87" />
-  </li>
-  <li data-bind="visible: hasMaintLoan_148_visible">
-    <label for="hasMaintLoan_148">Did you enter a loan?</label>
-    <input name="hasMaintLoan_148" id="hasMaintLoan_148" type="checkbox" data-bind="checked: hasMaintLoan_148" />
-  </li>
-  <li data-bind="visible: sellingPrice_246_visible">
-    <label for="sellingPrice_246">What was the selling price?</label>
-    <input name="sellingPrice_246" id="sellingPrice_246" type="text" data-bind="value: sellingPrice_246" />
-  </li>
-  <li data-bind="visible: privateDebt_306_visible">
-    <label for="privateDebt_306">Private debts for the sold house:</label>
-    <input name="privateDebt_306" id="privateDebt_306" type="text" data-bind="value: privateDebt_306" />
-  </li>
-  <li data-bind="visible: valueResidue_371_visible">
-    <label for="valueResidue_371">Value residue:</label>
-    <input name="valueResidue_371" id="valueResidue_371" type="text" data-bind="value: valueResidue_371" />
-  </li>
-  
-</ul>
+    
+ <div id="0:page" data-bind="visible: ($page() === 0)">
+   <h1>Buying</h1>
+   <p data-bind="visible: hasBoughtHouse_87_visible">Did you buy a house in 2010?&nbsp;<span style=""><input type="number" data-bind="value: hasBoughtHouse_87"
+      name="hasBoughtHouse_87" id="hasBoughtHouse_87" /></span></p>
+   
+   <h1>Loaning</h1>
+   <p data-bind="visible: hasMaintLoan_148_visible">Did you enter a loan?&nbsp;<span style=""><input name="hasMaintLoan_148" id="hasMaintLoan_148" type="checkbox" data-bind="checked: hasMaintLoan_148" /></span></p>
+   
+   
+   <button data-bind="click: $prevPage">Previous</button>
+   <button data-bind="click: $nextPage">Next</button>
+ </div>
+
+ <div id="1:page" data-bind="visible: ($page() === 1)">
+   <h1>Selling</h1>
+   <p data-bind="visible: hasSoldHouse_27_visible">Did you sell a house in 2010?&nbsp;<span style=""><input type="radio" name="hasSoldHouse_27" id="hasSoldHouse_27" 
+        value="true" data-bind="checked: hasSoldHouse_27"  />
+       Yes
+   <input type="radio" name="hasSoldHouse_27" id="hasSoldHouse_27" 
+        value="" data-bind="checked: hasSoldHouse_27" />
+       No</span></p>
+   
+   <h2>You sold a house</h2>
+   <p data-bind="visible: sellingPrice_229_visible">What was the selling price?&nbsp;<span style="width: 400; font: &quot;Arial&quot;; fontsize: 14; color: #999999; "><input type="number" data-bind="value: sellingPrice_229"
+      name="sellingPrice_229" id="sellingPrice_229" /></span></p>
+   
+   <p data-bind="visible: privateDebt_289_visible">Private debts for the sold house:&nbsp;<span style="width: 400; font: &quot;Arial&quot;; fontsize: 14; color: #999999; "><input type="number" data-bind="value: privateDebt_289"
+      name="privateDebt_289" id="privateDebt_289" /></span></p>
+   
+   <p data-bind="visible: valueResidue_354_visible">Value residue:&nbsp;<span style="width: 400; font: &quot;Arial&quot;; fontsize: 14; color: #999999; "><input type="number" data-bind="value: valueResidue_354"
+      name="valueResidue_354" id="valueResidue_354" /></span></p>
+   
+   
+   
+   
+   <button data-bind="click: $prevPage">Previous</button>
+   <button data-bind="click: $nextPage">Next</button>
+ </div>
+
     <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
     <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
     <script>
@@ -52,25 +65,36 @@
     console.log("Computing: true\n");
     return true;
   }, self, {deferEvaluation: true});
-  self.sellingPrice_246 = ko.observable(0.0);
-  self.sellingPrice_246_visible = ko.computed(function() {
-    console.log("Computing: true && hasSoldHouse && !hasSoldHouse\n");
-    return true && self.hasSoldHouse_27() && !(self.hasSoldHouse_27());
+  self.sellingPrice_229 = ko.observable(0.0);
+  self.sellingPrice_229_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_27();
   }, self, {deferEvaluation: true});
-  self.privateDebt_306 = ko.observable(0.0);
-  self.privateDebt_306_visible = ko.computed(function() {
-    console.log("Computing: true && hasSoldHouse && !hasSoldHouse\n");
-    return true && self.hasSoldHouse_27() && !(self.hasSoldHouse_27());
+  self.privateDebt_289 = ko.observable(0.0);
+  self.privateDebt_289_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_27();
   }, self, {deferEvaluation: true});
-  self.valueResidue_371 = ko.computed(function() {
+  self.valueResidue_354 = ko.computed(function() {
     console.log("Computing: (sellingPrice - privateDebt)\n");
-    return (self.sellingPrice_246() - self.privateDebt_306());
+    return (self.sellingPrice_229() - self.privateDebt_289());
   }, self, {deferEvaluation: true});
-  self.valueResidue_371_readonly = true;
-  self.valueResidue_371_visible = ko.computed(function() {
-    console.log("Computing: true && hasSoldHouse && !hasSoldHouse\n");
-    return true && self.hasSoldHouse_27() && !(self.hasSoldHouse_27());
+  self.valueResidue_354_readonly = true;
+  self.valueResidue_354_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_27();
   }, self, {deferEvaluation: true});
+  
+  self.$page = ko.observable(0);
+  self.$prevPage = function () {
+    if (self.$page() > 0)  
+     self.$page(self.$page() - 1);
+  };
+  self.$nextPage = function () {
+    if (self.$page() < 1)  
+     self.$page(self.$page() + 1);
+  };
+  
 }
 $(document).ready(function() {
    ko.applyBindings(new taxOfficeExample$model());

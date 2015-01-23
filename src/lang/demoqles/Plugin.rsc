@@ -75,7 +75,7 @@ public void setupQLS() {
     
 //    annotator(start[Form](start[Form] pt) {
     annotator(Tree(Tree pt) {
-       msgs = doWithSheetAndForm(pt, check);
+       msgs = doWithSheetAndForm(pt, checkSheet);
        return pt[@messages=msgs];
     }),
     
@@ -83,7 +83,7 @@ public void setupQLS() {
       if (Stylesheet s := pt.args[1]) {
         return outline(s);
       }
-      throw "Error: not a form";
+      return error("BUG: not a sheet", pt@\loc);
     }),
     
     builder(set[Message] (Tree pt) {

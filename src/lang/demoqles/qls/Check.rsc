@@ -17,7 +17,7 @@ import Map;
 */
 
 
-set[Message] check(Stylesheet s, Form f) {
+set[Message] checkSheet(Stylesheet s, Form f) {
   qt = ( q.var: q.\type | /Question q := f, q has var ); 
   msgs = {};
   placed = {};
