@@ -55,12 +55,8 @@ set[Message] verifyForm(Form f, loc tempfile) {
   undef = checkScopes(us);
 
   output = runSMTsolver(tempfile, "<smt>\n<nonDet>\n<reach>\n<undef>");
-  println("OUTPUT");
-  println(output);
   // TODO: check output for well-formedness.
   results = parseOutput(output); 
-  //results = split("\n", output);
-  println(results);
   j = 0;
   set[Message] errs = {};
   for (i <- [0..size(ds)]) {

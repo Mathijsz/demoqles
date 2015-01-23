@@ -19,7 +19,7 @@ void testGen() {
 loc TEMPLATE = |project://demoqles/src/lang/demoqles/template.html|;
 
 str qName(Question q) = "<q.var>_<q@\loc.offset>";
-str qLabel(Question q) = "<q.label>";
+str qLabel(Question q) = "<q.label>"[1..-1];
 
 str ql2html(Form f) = form2html(f, form2items, form2model);
 
