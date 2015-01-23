@@ -1,8 +1,8 @@
 <html>
   <head>
     <title>taxOfficeExample</title>
-    <link rel="stylesheet" type="text/css" href="file:///Users/tvdstorm/CWI/muql/src/lang/muql/ql.css" />
-    <link rel="stylesheet" type="text/css" href="file:///Users/tvdstorm/CWI/muql/src/lang/muql/basic.css" />
+    <link rel="stylesheet" type="text/css" href="file:///Users/tvdstorm/CWI/muql/src/lang/demoqles/ql.css" />
+    <link rel="stylesheet" type="text/css" href="file:///Users/tvdstorm/CWI/muql/src/lang/demoqles/basic.css" />
   </head>
   <body>
     <ul>
@@ -18,41 +18,17 @@
     <label for="hasMaintLoan_148">"Did you enter a loan?"</label>
     <input name="hasMaintLoan_148" id="hasMaintLoan_148" type="checkbox" data-bind="checked: hasMaintLoan_148" />
   </li>
-  <li data-bind="visible: x_206_visible">
-    <label for="x_206">"A value"</label>
-    <input name="x_206" id="x_206" type="text" data-bind="value: x_206" />
+  <li data-bind="visible: sellingPrice_229_visible">
+    <label for="sellingPrice_229">"What was the selling price?"</label>
+    <input name="sellingPrice_229" id="sellingPrice_229" type="text" data-bind="value: sellingPrice_229" />
   </li>
-  <li data-bind="visible: sellingPrice_247_visible">
-    <label for="sellingPrice_247">"What was the selling price?"</label>
-    <input name="sellingPrice_247" id="sellingPrice_247" type="text" data-bind="value: sellingPrice_247" />
+  <li data-bind="visible: privateDebt_289_visible">
+    <label for="privateDebt_289">"Private debts for the sold house:"</label>
+    <input name="privateDebt_289" id="privateDebt_289" type="text" data-bind="value: privateDebt_289" />
   </li>
-  <li data-bind="visible: privateDebt_307_visible">
-    <label for="privateDebt_307">"Private debts for the sold house:"</label>
-    <input name="privateDebt_307" id="privateDebt_307" type="text" data-bind="value: privateDebt_307" />
-  </li>
-  <li data-bind="visible: valueResidue_372_visible">
-    <label for="valueResidue_372">"Value residue:"</label>
-    <input name="valueResidue_372" id="valueResidue_372" type="text" data-bind="value: valueResidue_372" />
-  </li>
-  <li data-bind="visible: z_459_visible">
-    <label for="z_459">"z"</label>
-    <input name="z_459" id="z_459" type="text" data-bind="value: z_459" />
-  </li>
-  <li data-bind="visible: privateDebt_491_visible">
-    <label for="privateDebt_491">"Bla"</label>
-    <input name="privateDebt_491" id="privateDebt_491" type="text" data-bind="value: privateDebt_491" />
-  </li>
-  <li data-bind="visible: valueResidue_521_visible">
-    <label for="valueResidue_521">"Foo"</label>
-    <input name="valueResidue_521" id="valueResidue_521" type="text" data-bind="value: valueResidue_521" />
-  </li>
-  <li data-bind="visible: u_597_visible">
-    <label for="u_597">"Unreachable"</label>
-    <input name="u_597" id="u_597" type="text" data-bind="value: u_597" />
-  </li>
-  <li data-bind="visible: u_627_visible">
-    <label for="u_627">"Unreachable"</label>
-    <input name="u_627" id="u_627" type="text" data-bind="value: u_627" />
+  <li data-bind="visible: valueResidue_354_visible">
+    <label for="valueResidue_354">"Value residue:"</label>
+    <input name="valueResidue_354" id="valueResidue_354" type="text" data-bind="value: valueResidue_354" />
   </li>
   
 </ul>
@@ -76,62 +52,24 @@
     console.log("Computing: true\n");
     return true;
   }, self, {deferEvaluation: true});
-  self.x_206 = ko.observable(0);
-  self.x_206_visible = ko.computed(function() {
-    console.log("Computing: true\n");
-    return true;
+  self.sellingPrice_229 = ko.observable(0.0);
+  self.sellingPrice_229_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_27();
   }, self, {deferEvaluation: true});
-  self.sellingPrice_247 = ko.observable(0.0);
-  self.sellingPrice_247_visible = ko.computed(function() {
-    console.log("Computing: true && x >= 0\n");
-    return true && self.x_206() >= 0;
+  self.privateDebt_289 = ko.observable(0.0);
+  self.privateDebt_289_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_27();
   }, self, {deferEvaluation: true});
-  self.privateDebt_307 = ko.observable(0.0);
-  self.privateDebt_307_visible = ko.computed(function() {
-    console.log("Computing: true && x >= 0\n");
-    return true && self.x_206() >= 0;
-  }, self, {deferEvaluation: true});
-  self.valueResidue_372 = ko.computed(function() {
+  self.valueResidue_354 = ko.computed(function() {
     console.log("Computing: (sellingPrice - privateDebt)\n");
-    return (self.sellingPrice_247() - (self.privateDebt_491_visible() ? self.privateDebt_491() : (self.privateDebt_307_visible() ? self.privateDebt_307() : null)));
+    return (self.sellingPrice_229() - self.privateDebt_289());
   }, self, {deferEvaluation: true});
-  self.valueResidue_372_readonly = true;
-  self.valueResidue_372_visible = ko.computed(function() {
-    console.log("Computing: true && x >= 0\n");
-    return true && self.x_206() >= 0;
-  }, self, {deferEvaluation: true});
-  self.z_459 = ko.computed(function() {
-    console.log("Computing: u\n");
-    return (self.u_597_visible() ? self.u_597() : (self.u_627_visible() ? self.u_627() : null));
-  }, self, {deferEvaluation: true});
-  self.z_459_readonly = true;
-  self.z_459_visible = ko.computed(function() {
-    console.log("Computing: true && x >= 0\n");
-    return true && self.x_206() >= 0;
-  }, self, {deferEvaluation: true});
-  self.privateDebt_491 = ko.observable(0.0);
-  self.privateDebt_491_visible = ko.computed(function() {
-    console.log("Computing: true && !(x >= 0)\n");
-    return true && !((self.x_206() >= 0));
-  }, self, {deferEvaluation: true});
-  self.valueResidue_521 = ko.computed(function() {
-    console.log("Computing: sellingPrice\n");
-    return self.sellingPrice_247();
-  }, self, {deferEvaluation: true});
-  self.valueResidue_521_readonly = true;
-  self.valueResidue_521_visible = ko.computed(function() {
-    console.log("Computing: true && !(x >= 0)\n");
-    return true && !((self.x_206() >= 0));
-  }, self, {deferEvaluation: true});
-  self.u_597 = ko.observable(0.0);
-  self.u_597_visible = ko.computed(function() {
-    console.log("Computing: true && x > 0 && x < 0\n");
-    return true && self.x_206() > 0 && self.x_206() < 0;
-  }, self, {deferEvaluation: true});
-  self.u_627 = ko.observable(0.0);
-  self.u_627_visible = ko.computed(function() {
-    console.log("Computing: true\n");
-    return true;
+  self.valueResidue_354_readonly = true;
+  self.valueResidue_354_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_27();
   }, self, {deferEvaluation: true});
 }
 $(document).ready(function() {

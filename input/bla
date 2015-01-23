@@ -1,0 +1,12 @@
+sat
+(model 
+  (define-fun x_206 () Int
+    0)
+)
+(error "line 26 column 10: proof is not available")
+sat
+(model 
+  (define-fun x_206 () Int
+    0)
+)
+(error "line 32 column 10: proof is not available")

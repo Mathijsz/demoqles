@@ -82,7 +82,6 @@ list[str] parseOutput(str output) {
   r = [];
   
   while (/^<result:(un)?sat>/ := output) {
-    println("Result: <result>");
     r += [result];
     output = output == result ? "" : output[size(result)..];
   }
@@ -92,6 +91,7 @@ list[str] parseOutput(str output) {
 
 str runSMTsolver(loc tmpfile, str input) {
   pid = createProcess(SOLVER_PATH, ["-smt2", "-nw", "-in"]);
+  writeFile(tmpfile, input);
   writeTo(pid, "<input>\n(exit)\n");
   x = trim(readEntireStream(pid));
   killProcess(pid);
@@ -194,7 +194,7 @@ str expr2smt(e:(Expr)`<Id x>`) {
 }
  
 str expr2smt((Expr)`(<Expr e>)`) = "<expr2smt(e)>";
-str expr2smt((Expr)`<Integer x>`) = "<x>";
+str expr2smt((Expr)`<Integer x>`) = "<x>.0";
 str expr2smt((Expr)`true`) = "true";
 str expr2smt((Expr)`false`) = "false";
 

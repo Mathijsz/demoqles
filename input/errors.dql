@@ -1,0 +1,25 @@
+form Errors { 
+  "A boolean" flag: boolean
+  
+  if (flag) {
+    "A value" x: money
+  }
+  
+  "Possibly undefined" y: money = x
+  
+  if (true && false) {
+    "Unreachable" u: money
+  }
+  
+  
+  "An numeric value" n: money
+  
+  if (n > 0) {
+     "A derived value" z: money = n + 10
+  }  
+
+  if (n < 0) {
+     "A derived value" z: money = 2 * n
+  }  
+  
+}

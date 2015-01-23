@@ -6,8 +6,7 @@ form taxOfficeExample {
   "Did you enter a loan?"
     hasMaintLoan: boolean
     
-   "A value" x: integer
-  if (x >= 0) {
+  if (hasSoldHouse) {
     "What was the selling price?"
       sellingPrice: money
     "Private debts for the sold house:"
@@ -15,21 +14,7 @@ form taxOfficeExample {
     "Value residue:"
       valueResidue: money = 
         (sellingPrice - privateDebt)
-    "z" z: money = u
   }
-  else {
-  "Bla" privateDebt: money
-     "Foo" valueResidue: money = sellingPrice
-  }
-  
-  if (x > 0 && x < 0) {
-    "Unreachable" u: money
-  }
-   "Unreachable" u: money
-  
-  //"Cycles" cycles: money = 1 + cycles
-  
-  
   
 }
 
