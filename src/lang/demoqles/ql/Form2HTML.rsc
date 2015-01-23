@@ -8,13 +8,13 @@ import lang::demoqles::ql::Bind;
 import IO;
 import ParseTree;
 
-void testGen() {
-  pt = parse(#start[Form], |project://demoqles/input/tax.mql|);
-  <f, defs> = definitions(pt.top);
-  f = bind(f, defs);
-  g = form2html(f);
-  println(g);
-}  
+//void testGen() {
+//  pt = parse(#start[Form], |project://demoqles/input/tax.mql|);
+//  <f, defs> = definitions(pt.top);
+//  f = bind(f, defs);
+//  g = form2html(f);
+//  println(g);
+//}  
 
 loc TEMPLATE = |project://demoqles/src/lang/demoqles/template.html|;
 

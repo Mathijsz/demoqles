@@ -23,26 +23,25 @@ import Message;
  
  - determinism
  - reachability
- - use when defined
  
 */
 
-void testSMT() {
-  pt = parse(#start[Form], |project://demoqles/input/errors.dql|);
-  <f, ds> = definitions(pt.top);
-  f = bind(f, ds);
-  l = |file:///tmp/tax.smt2|;
-  Script scr = script(qs2smt(sort(flatten(f))));
-  iprintln(verifyForm(f, |file:///|));
-  //if (detectCycles(f) != {}) {
-  //  println("Cycles");
-  //}
-  //else {
-  //  for (e <- verifyForm(f, l)) {
-  //    println(e);
-  //  }
-  //}
-}
+//void testSMT() {
+//  pt = parse(#start[Form], |project://demoqles/input/errors.dql|);
+//  <f, ds> = definitions(pt.top);
+//  f = bind(f, ds);
+//  l = |file:///tmp/tax.smt2|;
+//  Script scr = script(qs2smt(sort(flatten(f))));
+//  iprintln(verifyForm(f, |file:///|));
+//  //if (detectCycles(f) != {}) {
+//  //  println("Cycles");
+//  //}
+//  //else {
+//  //  for (e <- verifyForm(f, l)) {
+//  //    println(e);
+//  //  }
+//  //}
+//}
 
 str SOLVER_PATH = "/usr/local/bin/z3";
 
@@ -122,8 +121,6 @@ list[Command] question2smt(q:(Question)`<Label l> <Var v>: <Type t> = <Expr e>`)
 
 Sort type2smt((Type)`boolean`) = \bool();
 Sort type2smt((Type)`integer`) = \int();
-// todo!!!
-Sort type2smt((Type)`string`) = \int();
 Sort type2smt((Type)`money`) = \int();
 
 default Sort type2smt(Type t) { throw "Unsupported type: <t>"; }
