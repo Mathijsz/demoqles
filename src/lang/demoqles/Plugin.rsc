@@ -54,7 +54,6 @@ public void setupQL() {
           h = pt@\loc[extension="html"];
           writeFile(h, ql2html(f));
           temp = pt@\loc[extension="smt2"];
-          temp = |file:///tmp/<temp.file>|;
           return verifyForm(f, temp);
         }
         return msgs;

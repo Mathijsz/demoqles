@@ -5,6 +5,7 @@ import lang::demoqles::ql::Form2HTML;
 import lang::demoqles::ql::Form2Model;
 import List;
 import ParseTree;
+import String;
 
 /*
  Presupposes normalization which has the questions inlined into 
@@ -110,5 +111,7 @@ str condP(Question q, str x) =
 str span(Style y, str s) = "\<span style=\"<style2css(y)>\"\><s>\</span\>";
 
 str style2css((Style)`{<Style* ys>}`) 
-  = ( "" | it + "<n>: <v>; " | (Style)`<Id n>: <Value v>` <- ys );
+  = ( "" | it + "<n>: <s>; " | (Style)`<Id n>: <Value v>` <- ys, s := escape("<v>") );
+
+str escape(str x) = escape(x, ("\"": "&quot;"));
 

@@ -55,8 +55,12 @@ set[Message] verifyForm(Form f, loc tempfile) {
   undef = checkScopes(us);
 
   output = runSMTsolver(tempfile, "<smt>\n<nonDet>\n<reach>\n<undef>");
+  println("OUTPUT");
+  println(output);
   // TODO: check output for well-formedness.
-  results = split("\n", output);
+  results = parseOutput(output); 
+  //results = split("\n", output);
+  println(results);
   j = 0;
   set[Message] errs = {};
   for (i <- [0..size(ds)]) {
@@ -74,9 +78,21 @@ set[Message] verifyForm(Form f, loc tempfile) {
   return errs;
 }
 
+list[str] parseOutput(str output) {
+  r = [];
+  
+  while (/^<result:(un)?sat>/ := output) {
+    println("Result: <result>");
+    r += [result];
+    output = output == result ? "" : output[size(result)..];
+  }
+  
+  return r;
+}
+
 str runSMTsolver(loc tmpfile, str input) {
-  writeFile(tmpfile, input);
-  pid = createProcess(SOLVER_PATH, ["-smt2", "-nw", tmpfile.path]);
+  pid = createProcess(SOLVER_PATH, ["-smt2", "-nw", "-in"]);
+  writeTo(pid, "<input>\n(exit)\n");
   x = trim(readEntireStream(pid));
   killProcess(pid);
   return x;

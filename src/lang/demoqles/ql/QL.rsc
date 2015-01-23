@@ -29,7 +29,7 @@ syntax Expr
   )
   > left (
       add: Expr "+" Expr
-    | sub: Expr "-" Expr
+    | sub: Expr "-" !>> [a-zA-Z_] Expr
   )
   > non-assoc (
       lt: Expr "\<" Expr
