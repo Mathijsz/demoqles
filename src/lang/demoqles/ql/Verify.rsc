@@ -26,23 +26,6 @@ import Message;
  
 */
 
-//void testSMT() {
-//  pt = parse(#start[Form], |project://demoqles/input/errors.dql|);
-//  <f, ds> = definitions(pt.top);
-//  f = bind(f, ds);
-//  l = |file:///tmp/tax.smt2|;
-//  Script scr = script(qs2smt(sort(flatten(f))));
-//  iprintln(verifyForm(f, |file:///|));
-//  //if (detectCycles(f) != {}) {
-//  //  println("Cycles");
-//  //}
-//  //else {
-//  //  for (e <- verifyForm(f, l)) {
-//  //    println(e);
-//  //  }
-//  //}
-//}
-
 str SOLVER_PATH = "/usr/local/bin/z3";
 
 // requires bind
@@ -56,9 +39,7 @@ set[Message] verifyForm(Form f, loc tempfile) {
   spec = script(qs2smt(sort(flatten(f)))); 
   run(pid, spec, debug=true);
   
-  errs = {};
-  
-  errs += { warning("Unreachable", q@\loc) | /Question q := f, q has var, 
+  errs = { warning("Unreachable", q@\loc) | /Question q := f, q has var, 
                !check(pid, [\assert(var(qVisible(q)))]) };
 
 
@@ -81,14 +62,12 @@ str qName(str n, loc l) = "<n>_<l.offset>";
 str qName(Question q) = qName("<q.var>", q@\loc);
 str qVisible(Question q) = "<qName(q)>_visible";
 
-
 bool check(int z3Pid, list[Command] commands) {
-    commands = [push(1), *commands, checkSatisfiable(), pop(1)];
-    result = run(z3Pid, script(commands), debug=true);
-    return /sat() := result;
+  commands = [push(1), *commands, checkSatisfiable(), pop(1)];
+  result = run(z3Pid, script(commands), debug=true);
+  return /sat() := result;
 }
 
-// NB: does not terminate if cyclic dependencies.
 list[Question] sort(list[Question] qs) {
   solve (qs) {
     if ([*qs1, Question q1, *qs2, Question q2, *qs3] := qs, defs(q2) <= uses(q1)) {
@@ -96,13 +75,6 @@ list[Question] sort(list[Question] qs) {
     }
   }
   return qs;
-  
-  //for ([*qs1, Question q1, *qs2, Question q2, *qs3] := qs, uses(q1) != {}, uses(q1) <= defs(q2)) {
-  //  // werkt niet!!?!?!?!?!?! q1 can be empty in the body...
-  //  println("Uses q1: <uses(q1)> (q1 = <q1>)");
-  //  println("Defs q2: <defs(q2)> (q2 = <q2>");
-  //  qs = [*qs1, q2, *qs2, q1, *qs3];
-  //}
 }
 
 
@@ -110,7 +82,7 @@ list[Question] sort(list[Question] qs) {
 list[Command] qs2smt(list[Question] qs) = ( [] | it + ifthen2smt(q) | q <- qs ); 
 
 list[Command] ifthen2smt((Question)`if (<Expr c>) <Question q>`)
-  = [defineFunction("<qName(q)>_visible", [], \bool(), expr2smt(c))]
+  = [defineFunction(qVisible(q), [], \bool(), expr2smt(c))]
   + question2smt(q);
 
 list[Command] question2smt(q:(Question)`<Label l> <Var v>: <Type t>`)

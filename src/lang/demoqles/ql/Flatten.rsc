@@ -1,7 +1,7 @@
 module lang::demoqles::ql::Flatten
 
 import lang::demoqles::ql::QL;
-import ParseTree; // apparently needed
+import ParseTree; 
 import IO;
 
 list[Question] flatten(Form f) 

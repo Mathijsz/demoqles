@@ -5,46 +5,33 @@
     <link rel="stylesheet" type="text/css" href="file:///Users/tvdstorm/CWI/muql/src/lang/demoqles/basic.css" />
   </head>
   <body>
-    
- <div id="0:page" data-bind="visible: ($page() === 0)">
-   <h1>Buying</h1>
-   <p data-bind="visible: hasBoughtHouse_87_visible">Did you buy a house in 2010?&nbsp;<span style=""><input type="number" data-bind="value: hasBoughtHouse_87"
-      name="hasBoughtHouse_87" id="hasBoughtHouse_87" /></span></p>
-   
-   <h1>Loaning</h1>
-   <p data-bind="visible: hasMaintLoan_148_visible">Did you enter a loan?&nbsp;<span style=""><input name="hasMaintLoan_148" id="hasMaintLoan_148" type="checkbox" data-bind="checked: hasMaintLoan_148" /></span></p>
-   
-   
-   <button data-bind="click: $prevPage">Previous</button>
-   <button data-bind="click: $nextPage">Next</button>
- </div>
-
- <div id="1:page" data-bind="visible: ($page() === 1)">
-   <h1>Selling</h1>
-   <p data-bind="visible: hasSoldHouse_27_visible">Did you sell a house in 2010?&nbsp;<span style=""><input type="radio" name="hasSoldHouse_27" id="hasSoldHouse_27" 
-        value="true" data-bind="checked: hasSoldHouse_27"  />
-       Yes
-   <input type="radio" name="hasSoldHouse_27" id="hasSoldHouse_27" 
-        value="" data-bind="checked: hasSoldHouse_27" />
-       No</span></p>
-   
-   <h2>You sold a house</h2>
-   <p data-bind="visible: sellingPrice_229_visible">What was the selling price?&nbsp;<span style="width: 400; font: &quot;Arial&quot;; fontsize: 14; color: #999999; "><input type="number" data-bind="value: sellingPrice_229"
-      name="sellingPrice_229" id="sellingPrice_229" /></span></p>
-   
-   <p data-bind="visible: privateDebt_289_visible">Private debts for the sold house:&nbsp;<span style="width: 400; font: &quot;Arial&quot;; fontsize: 14; color: #999999; "><input type="number" data-bind="value: privateDebt_289"
-      name="privateDebt_289" id="privateDebt_289" /></span></p>
-   
-   <p data-bind="visible: valueResidue_354_visible">Value residue:&nbsp;<span style="width: 400; font: &quot;Arial&quot;; fontsize: 14; color: #999999; "><input type="number" data-bind="value: valueResidue_354"
-      name="valueResidue_354" id="valueResidue_354" /></span></p>
-   
-   
-   
-   
-   <button data-bind="click: $prevPage">Previous</button>
-   <button data-bind="click: $nextPage">Next</button>
- </div>
-
+    <ul>
+  <li data-bind="visible: hasSoldHouse_27_visible">
+    <label for="hasSoldHouse_27">Did yosadasdassell a house in 2010?</label>
+    <input name="hasSoldHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_170_visible">
+    <label for="hasMaintLoan_170">Did you enter a loan?</label>
+    <input name="hasMaintLoan_170" id="hasMaintLoan_170" type="checkbox" data-bind="checked: hasMaintLoan_170" />
+  </li>
+  <li data-bind="visible: sellingPrice_278_visible">
+    <label for="sellingPrice_278">What was the selling price?</label>
+    <input name="sellingPrice_278" id="sellingPrice_278" type="text" data-bind="value: sellingPrice_278" />
+  </li>
+  <li data-bind="visible: privateDebt_345_visible">
+    <label for="privateDebt_345">Private debts for the sold house:</label>
+    <input name="privateDebt_345" id="privateDebt_345" type="text" data-bind="value: privateDebt_345" />
+  </li>
+  <li data-bind="visible: valueResidue_417_visible">
+    <label for="valueResidue_417">Value residue:</label>
+    <input name="valueResidue_417" id="valueResidue_417" type="text" data-bind="value: valueResidue_417" />
+  </li>
+  
+</ul>
     <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
     <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
     <script>
@@ -55,46 +42,2520 @@
     console.log("Computing: true\n");
     return true;
   }, self, {deferEvaluation: true});
-  self.hasBoughtHouse_87 = ko.observable(false);
-  self.hasBoughtHouse_87_visible = ko.computed(function() {
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
     console.log("Computing: true\n");
     return true;
   }, self, {deferEvaluation: true});
-  self.hasMaintLoan_148 = ko.observable(false);
-  self.hasMaintLoan_148_visible = ko.computed(function() {
+  self.hasMaintLoan_170 = ko.observable(false);
+  self.hasMaintLoan_170_visible = ko.computed(function() {
     console.log("Computing: true\n");
     return true;
   }, self, {deferEvaluation: true});
-  self.sellingPrice_229 = ko.observable(0.0);
-  self.sellingPrice_229_visible = ko.computed(function() {
+  self.sellingPrice_278 = ko.observable(0.0);
+  self.sellingPrice_278_visible = ko.computed(function() {
     console.log("Computing: true && hasSoldHouse\n");
-    return true && self.hasSoldHouse_27();
+    return true && self.hasSoldHouse_69();
   }, self, {deferEvaluation: true});
-  self.privateDebt_289 = ko.observable(0.0);
-  self.privateDebt_289_visible = ko.computed(function() {
+  self.privateDebt_345 = ko.observable(0.0);
+  self.privateDebt_345_visible = ko.computed(function() {
     console.log("Computing: true && hasSoldHouse\n");
-    return true && self.hasSoldHouse_27();
+    return true && self.hasSoldHouse_69();
   }, self, {deferEvaluation: true});
-  self.valueResidue_354 = ko.computed(function() {
+  self.valueResidue_417 = ko.computed(function() {
     console.log("Computing: (sellingPrice - privateDebt)\n");
-    return (self.sellingPrice_229() - self.privateDebt_289());
+    return (self.sellingPrice_314() - self.privateDebt_387());
   }, self, {deferEvaluation: true});
-  self.valueResidue_354_readonly = true;
-  self.valueResidue_354_visible = ko.computed(function() {
+  self.valueResidue_417_readonly = true;
+  self.valueResidue_417_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+a-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_170_visible">
+    <label for="hasMaintLoan_170">Did you enter a loan?</label>
+    <input name="hasMaintLoan_170" id="hasMaintLoan_170" type="checkbox" data-bind="checked: hasMaintLoan_170" />
+  </li>
+  <li data-bind="visible: sellingPrice_277_visible">
+    <label for="sellingPrice_277">What was the selling price?</label>
+    <input name="sellingPrice_277" id="sellingPrice_277" type="text" data-bind="value: sellingPrice_277" />
+  </li>
+  <li data-bind="visible: privateDebt_344_visible">
+    <label for="privateDebt_344">Private debts for the sold house:</label>
+    <input name="privateDebt_344" id="privateDebt_344" type="text" data-bind="value: privateDebt_344" />
+  </li>
+  <li data-bind="visible: valueResidue_416_visible">
+    <label for="valueResidue_416">Value residue:</label>
+    <input name="valueResidue_416" id="valueResidue_416" type="text" data-bind="value: valueResidue_416" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_170 = ko.observable(false);
+  self.hasMaintLoan_170_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_277 = ko.observable(0.0);
+  self.sellingPrice_277_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_344 = ko.observable(0.0);
+  self.privateDebt_344_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_416 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_313() - self.privateDebt_386());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_416_readonly = true;
+  self.valueResidue_416_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+ta-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_170_visible">
+    <label for="hasMaintLoan_170">Did you enter a loan?</label>
+    <input name="hasMaintLoan_170" id="hasMaintLoan_170" type="checkbox" data-bind="checked: hasMaintLoan_170" />
+  </li>
+  <li data-bind="visible: sellingPrice_282_visible">
+    <label for="sellingPrice_282">What was the selling price?</label>
+    <input name="sellingPrice_282" id="sellingPrice_282" type="text" data-bind="value: sellingPrice_282" />
+  </li>
+  <li data-bind="visible: privateDebt_349_visible">
+    <label for="privateDebt_349">Private debts for the sold house:</label>
+    <input name="privateDebt_349" id="privateDebt_349" type="text" data-bind="value: privateDebt_349" />
+  </li>
+  <li data-bind="visible: valueResidue_421_visible">
+    <label for="valueResidue_421">Value residue:</label>
+    <input name="valueResidue_421" id="valueResidue_421" type="text" data-bind="value: valueResidue_421" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_170 = ko.observable(false);
+  self.hasMaintLoan_170_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_282 = ko.observable(0.0);
+  self.sellingPrice_282_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_349 = ko.observable(0.0);
+  self.privateDebt_349_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_421 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_318() - self.privateDebt_391());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_421_readonly = true;
+  self.valueResidue_421_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+nd="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_170_visible">
+    <label for="hasMaintLoan_170">Did you enter a loan?</label>
+    <input name="hasMaintLoan_170" id="hasMaintLoan_170" type="checkbox" data-bind="checked: hasMaintLoan_170" />
+  </li>
+  <li data-bind="visible: sellingPrice_282_visible">
+    <label for="sellingPrice_282">What was the selling price?</label>
+    <input name="sellingPrice_282" id="sellingPrice_282" type="text" data-bind="value: sellingPrice_282" />
+  </li>
+  <li data-bind="visible: privateDebt_349_visible">
+    <label for="privateDebt_349">Private debts for the sold house:</label>
+    <input name="privateDebt_349" id="privateDebt_349" type="text" data-bind="value: privateDebt_349" />
+  </li>
+  <li data-bind="visible: valueResidue_421_visible">
+    <label for="valueResidue_421">Value residue:</label>
+    <input name="valueResidue_421" id="valueResidue_421" type="text" data-bind="value: valueResidue_421" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_170 = ko.observable(false);
+  self.hasMaintLoan_170_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_282 = ko.observable(0.0);
+  self.sellingPrice_282_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_349 = ko.observable(0.0);
+  self.privateDebt_349_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_421 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_318() - self.privateDebt_391());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_421_readonly = true;
+  self.valueResidue_421_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+nd="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_170_visible">
+    <label for="hasMaintLoan_170">Did you enter a loan?</label>
+    <input name="hasMaintLoan_170" id="hasMaintLoan_170" type="checkbox" data-bind="checked: hasMaintLoan_170" />
+  </li>
+  <li data-bind="visible: sellingPrice_283_visible">
+    <label for="sellingPrice_283">What was the selling price?</label>
+    <input name="sellingPrice_283" id="sellingPrice_283" type="text" data-bind="value: sellingPrice_283" />
+  </li>
+  <li data-bind="visible: privateDebt_350_visible">
+    <label for="privateDebt_350">Private debts for the sold house:</label>
+    <input name="privateDebt_350" id="privateDebt_350" type="text" data-bind="value: privateDebt_350" />
+  </li>
+  <li data-bind="visible: valueResidue_422_visible">
+    <label for="valueResidue_422">Value residue:</label>
+    <input name="valueResidue_422" id="valueResidue_422" type="text" data-bind="value: valueResidue_422" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_170 = ko.observable(false);
+  self.hasMaintLoan_170_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_283 = ko.observable(0.0);
+  self.sellingPrice_283_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_350 = ko.observable(0.0);
+  self.privateDebt_350_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_422 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_319() - self.privateDebt_392());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_422_readonly = true;
+  self.valueResidue_422_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+d="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_170_visible">
+    <label for="hasMaintLoan_170">Did you enter a loan?</label>
+    <input name="hasMaintLoan_170" id="hasMaintLoan_170" type="checkbox" data-bind="checked: hasMaintLoan_170" />
+  </li>
+  <li data-bind="visible: sellingPrice_286_visible">
+    <label for="sellingPrice_286">What was the selling price?</label>
+    <input name="sellingPrice_286" id="sellingPrice_286" type="text" data-bind="value: sellingPrice_286" />
+  </li>
+  <li data-bind="visible: privateDebt_353_visible">
+    <label for="privateDebt_353">Private debts for the sold house:</label>
+    <input name="privateDebt_353" id="privateDebt_353" type="text" data-bind="value: privateDebt_353" />
+  </li>
+  <li data-bind="visible: valueResidue_425_visible">
+    <label for="valueResidue_425">Value residue:</label>
+    <input name="valueResidue_425" id="valueResidue_425" type="text" data-bind="value: valueResidue_425" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_170 = ko.observable(false);
+  self.hasMaintLoan_170_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_286 = ko.observable(0.0);
+  self.sellingPrice_286_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_353 = ko.observable(0.0);
+  self.privateDebt_353_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_425 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_322() - self.privateDebt_395());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_425_readonly = true;
+  self.valueResidue_425_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_170_visible">
+    <label for="hasMaintLoan_170">Did you enter a loan?</label>
+    <input name="hasMaintLoan_170" id="hasMaintLoan_170" type="checkbox" data-bind="checked: hasMaintLoan_170" />
+  </li>
+  <li data-bind="visible: sellingPrice_286_visible">
+    <label for="sellingPrice_286">What was the selling price?</label>
+    <input name="sellingPrice_286" id="sellingPrice_286" type="text" data-bind="value: sellingPrice_286" />
+  </li>
+  <li data-bind="visible: privateDebt_353_visible">
+    <label for="privateDebt_353">Private debts for the sold house:</label>
+    <input name="privateDebt_353" id="privateDebt_353" type="text" data-bind="value: privateDebt_353" />
+  </li>
+  <li data-bind="visible: valueResidue_425_visible">
+    <label for="valueResidue_425">Value residue:</label>
+    <input name="valueResidue_425" id="valueResidue_425" type="text" data-bind="value: valueResidue_425" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_170 = ko.observable(false);
+  self.hasMaintLoan_170_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_286 = ko.observable(0.0);
+  self.sellingPrice_286_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_353 = ko.observable(0.0);
+  self.privateDebt_353_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_425 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_322() - self.privateDebt_395());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_425_readonly = true;
+  self.valueResidue_425_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_170_visible">
+    <label for="hasMaintLoan_170">Did you enter a loan?</label>
+    <input name="hasMaintLoan_170" id="hasMaintLoan_170" type="checkbox" data-bind="checked: hasMaintLoan_170" />
+  </li>
+  <li data-bind="visible: sellingPrice_275_visible">
+    <label for="sellingPrice_275">What was the selling price?</label>
+    <input name="sellingPrice_275" id="sellingPrice_275" type="text" data-bind="value: sellingPrice_275" />
+  </li>
+  <li data-bind="visible: privateDebt_342_visible">
+    <label for="privateDebt_342">Private debts for the sold house:</label>
+    <input name="privateDebt_342" id="privateDebt_342" type="text" data-bind="value: privateDebt_342" />
+  </li>
+  <li data-bind="visible: valueResidue_414_visible">
+    <label for="valueResidue_414">Value residue:</label>
+    <input name="valueResidue_414" id="valueResidue_414" type="text" data-bind="value: valueResidue_414" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_170 = ko.observable(false);
+  self.hasMaintLoan_170_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_275 = ko.observable(0.0);
+  self.sellingPrice_275_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_342 = ko.observable(0.0);
+  self.privateDebt_342_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_414 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_311() - self.privateDebt_384());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_414_readonly = true;
+  self.valueResidue_414_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_170_visible">
+    <label for="hasMaintLoan_170">Did you enter a loan?</label>
+    <input name="hasMaintLoan_170" id="hasMaintLoan_170" type="checkbox" data-bind="checked: hasMaintLoan_170" />
+  </li>
+  <li data-bind="visible: sellingPrice_275_visible">
+    <label for="sellingPrice_275">What was the selling price?</label>
+    <input name="sellingPrice_275" id="sellingPrice_275" type="text" data-bind="value: sellingPrice_275" />
+  </li>
+  <li data-bind="visible: privateDebt_342_visible">
+    <label for="privateDebt_342">Private debts for the sold house:</label>
+    <input name="privateDebt_342" id="privateDebt_342" type="text" data-bind="value: privateDebt_342" />
+  </li>
+  <li data-bind="visible: valueResidue_414_visible">
+    <label for="valueResidue_414">Value residue:</label>
+    <input name="valueResidue_414" id="valueResidue_414" type="text" data-bind="value: valueResidue_414" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_170 = ko.observable(false);
+  self.hasMaintLoan_170_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_275 = ko.observable(0.0);
+  self.sellingPrice_275_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_342 = ko.observable(0.0);
+  self.privateDebt_342_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_414 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_311() - self.privateDebt_384());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_414_readonly = true;
+  self.valueResidue_414_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_170_visible">
+    <label for="hasMaintLoan_170">Did you enter a loan?</label>
+    <input name="hasMaintLoan_170" id="hasMaintLoan_170" type="checkbox" data-bind="checked: hasMaintLoan_170" />
+  </li>
+  <li data-bind="visible: sellingPrice_247_visible">
+    <label for="sellingPrice_247">What was the selling price?</label>
+    <input name="sellingPrice_247" id="sellingPrice_247" type="text" data-bind="value: sellingPrice_247" />
+  </li>
+  <li data-bind="visible: privateDebt_314_visible">
+    <label for="privateDebt_314">Private debts for the sold house:</label>
+    <input name="privateDebt_314" id="privateDebt_314" type="text" data-bind="value: privateDebt_314" />
+  </li>
+  <li data-bind="visible: valueResidue_386_visible">
+    <label for="valueResidue_386">Value residue:</label>
+    <input name="valueResidue_386" id="valueResidue_386" type="text" data-bind="value: valueResidue_386" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_170 = ko.observable(false);
+  self.hasMaintLoan_170_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_247 = ko.observable(0.0);
+  self.sellingPrice_247_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_314 = ko.observable(0.0);
+  self.privateDebt_314_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_386 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_283() - self.privateDebt_356());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_386_readonly = true;
+  self.valueResidue_386_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+ldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_170_visible">
+    <label for="hasMaintLoan_170">Did you enter a loan?</label>
+    <input name="hasMaintLoan_170" id="hasMaintLoan_170" type="checkbox" data-bind="checked: hasMaintLoan_170" />
+  </li>
+  <li data-bind="visible: sellingPrice_247_visible">
+    <label for="sellingPrice_247">What was the selling price?</label>
+    <input name="sellingPrice_247" id="sellingPrice_247" type="text" data-bind="value: sellingPrice_247" />
+  </li>
+  <li data-bind="visible: privateDebt_314_visible">
+    <label for="privateDebt_314">Private debts for the sold house:</label>
+    <input name="privateDebt_314" id="privateDebt_314" type="text" data-bind="value: privateDebt_314" />
+  </li>
+  <li data-bind="visible: valueResidue_386_visible">
+    <label for="valueResidue_386">Value residue:</label>
+    <input name="valueResidue_386" id="valueResidue_386" type="text" data-bind="value: valueResidue_386" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_170 = ko.observable(false);
+  self.hasMaintLoan_170_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_247 = ko.observable(0.0);
+  self.sellingPrice_247_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_314 = ko.observable(0.0);
+  self.privateDebt_314_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_386 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_283() - self.privateDebt_356());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_386_readonly = true;
+  self.valueResidue_386_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+ldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_170_visible">
+    <label for="hasMaintLoan_170">Did you enter a loan?</label>
+    <input name="hasMaintLoan_170" id="hasMaintLoan_170" type="checkbox" data-bind="checked: hasMaintLoan_170" />
+  </li>
+  <li data-bind="visible: sellingPrice_247_visible">
+    <label for="sellingPrice_247">What was the selling price?</label>
+    <input name="sellingPrice_247" id="sellingPrice_247" type="text" data-bind="value: sellingPrice_247" />
+  </li>
+  <li data-bind="visible: privateDebt_314_visible">
+    <label for="privateDebt_314">Private debts for the sold house:</label>
+    <input name="privateDebt_314" id="privateDebt_314" type="text" data-bind="value: privateDebt_314" />
+  </li>
+  <li data-bind="visible: valueResidue_386_visible">
+    <label for="valueResidue_386">Value residue:</label>
+    <input name="valueResidue_386" id="valueResidue_386" type="text" data-bind="value: valueResidue_386" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_170 = ko.observable(false);
+  self.hasMaintLoan_170_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_247 = ko.observable(0.0);
+  self.sellingPrice_247_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_314 = ko.observable(0.0);
+  self.privateDebt_314_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_386 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_283() - self.privateDebt_356());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_386_readonly = true;
+  self.valueResidue_386_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_170_visible">
+    <label for="hasMaintLoan_170">Did you enter a loan?</label>
+    <input name="hasMaintLoan_170" id="hasMaintLoan_170" type="checkbox" data-bind="checked: hasMaintLoan_170" />
+  </li>
+  <li data-bind="visible: sellingPrice_247_visible">
+    <label for="sellingPrice_247">What was the selling price?</label>
+    <input name="sellingPrice_247" id="sellingPrice_247" type="text" data-bind="value: sellingPrice_247" />
+  </li>
+  <li data-bind="visible: privateDebt_314_visible">
+    <label for="privateDebt_314">Private debts for the sold house:</label>
+    <input name="privateDebt_314" id="privateDebt_314" type="text" data-bind="value: privateDebt_314" />
+  </li>
+  <li data-bind="visible: valueResidue_386_visible">
+    <label for="valueResidue_386">Value residue:</label>
+    <input name="valueResidue_386" id="valueResidue_386" type="text" data-bind="value: valueResidue_386" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_170 = ko.observable(false);
+  self.hasMaintLoan_170_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_247 = ko.observable(0.0);
+  self.sellingPrice_247_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_314 = ko.observable(0.0);
+  self.privateDebt_314_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_386 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_283() - self.privateDebt_356());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_386_readonly = true;
+  self.valueResidue_386_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+ouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_170_visible">
+    <label for="hasMaintLoan_170">Did you enter a loan?</label>
+    <input name="hasMaintLoan_170" id="hasMaintLoan_170" type="checkbox" data-bind="checked: hasMaintLoan_170" />
+  </li>
+  <li data-bind="visible: sellingPrice_247_visible">
+    <label for="sellingPrice_247">What was the selling price?</label>
+    <input name="sellingPrice_247" id="sellingPrice_247" type="text" data-bind="value: sellingPrice_247" />
+  </li>
+  <li data-bind="visible: privateDebt_316_visible">
+    <label for="privateDebt_316">Private debts for the sold house:</label>
+    <input name="privateDebt_316" id="privateDebt_316" type="text" data-bind="value: privateDebt_316" />
+  </li>
+  <li data-bind="visible: valueResidue_388_visible">
+    <label for="valueResidue_388">Value residue:</label>
+    <input name="valueResidue_388" id="valueResidue_388" type="text" data-bind="value: valueResidue_388" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_170 = ko.observable(false);
+  self.hasMaintLoan_170_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_247 = ko.observable(0.0);
+  self.sellingPrice_247_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_316 = ko.observable(0.0);
+  self.privateDebt_316_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_388 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_283() - self.privateDebt_358());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_388_readonly = true;
+  self.valueResidue_388_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+se_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_170_visible">
+    <label for="hasMaintLoan_170">Did you enter a loan?</label>
+    <input name="hasMaintLoan_170" id="hasMaintLoan_170" type="checkbox" data-bind="checked: hasMaintLoan_170" />
+  </li>
+  <li data-bind="visible: sellingPrice_247_visible">
+    <label for="sellingPrice_247">What was the selling price?</label>
+    <input name="sellingPrice_247" id="sellingPrice_247" type="text" data-bind="value: sellingPrice_247" />
+  </li>
+  <li data-bind="visible: privateDebt_316_visible">
+    <label for="privateDebt_316">Private debts for the sold house:</label>
+    <input name="privateDebt_316" id="privateDebt_316" type="text" data-bind="value: privateDebt_316" />
+  </li>
+  <li data-bind="visible: valueResidue_388_visible">
+    <label for="valueResidue_388">Value residue:</label>
+    <input name="valueResidue_388" id="valueResidue_388" type="text" data-bind="value: valueResidue_388" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_170 = ko.observable(false);
+  self.hasMaintLoan_170_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_247 = ko.observable(0.0);
+  self.sellingPrice_247_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_316 = ko.observable(0.0);
+  self.privateDebt_316_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_388 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_283() - self.privateDebt_358());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_388_readonly = true;
+  self.valueResidue_388_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+se_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_169_visible">
+    <label for="hasMaintLoan_169">Did you enter a loan?</label>
+    <input name="hasMaintLoan_169" id="hasMaintLoan_169" type="checkbox" data-bind="checked: hasMaintLoan_169" />
+  </li>
+  <li data-bind="visible: sellingPrice_246_visible">
+    <label for="sellingPrice_246">What was the selling price?</label>
+    <input name="sellingPrice_246" id="sellingPrice_246" type="text" data-bind="value: sellingPrice_246" />
+  </li>
+  <li data-bind="visible: privateDebt_306_visible">
+    <label for="privateDebt_306">Private debts for the sold house:</label>
+    <input name="privateDebt_306" id="privateDebt_306" type="text" data-bind="value: privateDebt_306" />
+  </li>
+  <li data-bind="visible: valueResidue_371_visible">
+    <label for="valueResidue_371">Value residue:</label>
+    <input name="valueResidue_371" id="valueResidue_371" type="text" data-bind="value: valueResidue_371" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_169 = ko.observable(false);
+  self.hasMaintLoan_169_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_246 = ko.observable(0.0);
+  self.sellingPrice_246_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_306 = ko.observable(0.0);
+  self.privateDebt_306_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_371 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_282() - self.privateDebt_348());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_371_readonly = true;
+  self.valueResidue_371_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+7" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_162_visible">
+    <label for="hasMaintLoan_162">Did you enter a loan?</label>
+    <input name="hasMaintLoan_162" id="hasMaintLoan_162" type="checkbox" data-bind="checked: hasMaintLoan_162" />
+  </li>
+  <li data-bind="visible: sellingPrice_239_visible">
+    <label for="sellingPrice_239">What was the selling price?</label>
+    <input name="sellingPrice_239" id="sellingPrice_239" type="text" data-bind="value: sellingPrice_239" />
+  </li>
+  <li data-bind="visible: privateDebt_299_visible">
+    <label for="privateDebt_299">Private debts for the sold house:</label>
+    <input name="privateDebt_299" id="privateDebt_299" type="text" data-bind="value: privateDebt_299" />
+  </li>
+  <li data-bind="visible: valueResidue_364_visible">
+    <label for="valueResidue_364">Value residue:</label>
+    <input name="valueResidue_364" id="valueResidue_364" type="text" data-bind="value: valueResidue_364" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_162 = ko.observable(false);
+  self.hasMaintLoan_162_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_239 = ko.observable(0.0);
+  self.sellingPrice_239_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_299 = ko.observable(0.0);
+  self.privateDebt_299_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_275() - self.privateDebt_341());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364_readonly = true;
+  self.valueResidue_364_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+House_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_162_visible">
+    <label for="hasMaintLoan_162">Did you enter a loan?</label>
+    <input name="hasMaintLoan_162" id="hasMaintLoan_162" type="checkbox" data-bind="checked: hasMaintLoan_162" />
+  </li>
+  <li data-bind="visible: sellingPrice_239_visible">
+    <label for="sellingPrice_239">What was the selling price?</label>
+    <input name="sellingPrice_239" id="sellingPrice_239" type="text" data-bind="value: sellingPrice_239" />
+  </li>
+  <li data-bind="visible: privateDebt_299_visible">
+    <label for="privateDebt_299">Private debts for the sold house:</label>
+    <input name="privateDebt_299" id="privateDebt_299" type="text" data-bind="value: privateDebt_299" />
+  </li>
+  <li data-bind="visible: valueResidue_364_visible">
+    <label for="valueResidue_364">Value residue:</label>
+    <input name="valueResidue_364" id="valueResidue_364" type="text" data-bind="value: valueResidue_364" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_162 = ko.observable(false);
+  self.hasMaintLoan_162_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_239 = ko.observable(0.0);
+  self.sellingPrice_239_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_299 = ko.observable(0.0);
+  self.privateDebt_299_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_275() - self.privateDebt_341());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364_readonly = true;
+  self.valueResidue_364_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+ouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_162_visible">
+    <label for="hasMaintLoan_162">Did you enter a loan?</label>
+    <input name="hasMaintLoan_162" id="hasMaintLoan_162" type="checkbox" data-bind="checked: hasMaintLoan_162" />
+  </li>
+  <li data-bind="visible: sellingPrice_239_visible">
+    <label for="sellingPrice_239">What was the selling price?</label>
+    <input name="sellingPrice_239" id="sellingPrice_239" type="text" data-bind="value: sellingPrice_239" />
+  </li>
+  <li data-bind="visible: privateDebt_299_visible">
+    <label for="privateDebt_299">Private debts for the sold house:</label>
+    <input name="privateDebt_299" id="privateDebt_299" type="text" data-bind="value: privateDebt_299" />
+  </li>
+  <li data-bind="visible: valueResidue_364_visible">
+    <label for="valueResidue_364">Value residue:</label>
+    <input name="valueResidue_364" id="valueResidue_364" type="text" data-bind="value: valueResidue_364" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_162 = ko.observable(false);
+  self.hasMaintLoan_162_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_239 = ko.observable(0.0);
+  self.sellingPrice_239_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_299 = ko.observable(0.0);
+  self.privateDebt_299_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_275() - self.privateDebt_341());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364_readonly = true;
+  self.valueResidue_364_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+House_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_162_visible">
+    <label for="hasMaintLoan_162">Did you enter a loan?</label>
+    <input name="hasMaintLoan_162" id="hasMaintLoan_162" type="checkbox" data-bind="checked: hasMaintLoan_162" />
+  </li>
+  <li data-bind="visible: sellingPrice_239_visible">
+    <label for="sellingPrice_239">What was the selling price?</label>
+    <input name="sellingPrice_239" id="sellingPrice_239" type="text" data-bind="value: sellingPrice_239" />
+  </li>
+  <li data-bind="visible: privateDebt_299_visible">
+    <label for="privateDebt_299">Private debts for the sold house:</label>
+    <input name="privateDebt_299" id="privateDebt_299" type="text" data-bind="value: privateDebt_299" />
+  </li>
+  <li data-bind="visible: valueResidue_364_visible">
+    <label for="valueResidue_364">Value residue:</label>
+    <input name="valueResidue_364" id="valueResidue_364" type="text" data-bind="value: valueResidue_364" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_162 = ko.observable(false);
+  self.hasMaintLoan_162_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_239 = ko.observable(0.0);
+  self.sellingPrice_239_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_299 = ko.observable(0.0);
+  self.privateDebt_299_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_275() - self.privateDebt_341());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364_readonly = true;
+  self.valueResidue_364_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+dHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_162_visible">
+    <label for="hasMaintLoan_162">Did you enter a loan?</label>
+    <input name="hasMaintLoan_162" id="hasMaintLoan_162" type="checkbox" data-bind="checked: hasMaintLoan_162" />
+  </li>
+  <li data-bind="visible: sellingPrice_239_visible">
+    <label for="sellingPrice_239">What was the selling price?</label>
+    <input name="sellingPrice_239" id="sellingPrice_239" type="text" data-bind="value: sellingPrice_239" />
+  </li>
+  <li data-bind="visible: privateDebt_299_visible">
+    <label for="privateDebt_299">Private debts for the sold house:</label>
+    <input name="privateDebt_299" id="privateDebt_299" type="text" data-bind="value: privateDebt_299" />
+  </li>
+  <li data-bind="visible: valueResidue_364_visible">
+    <label for="valueResidue_364">Value residue:</label>
+    <input name="valueResidue_364" id="valueResidue_364" type="text" data-bind="value: valueResidue_364" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_162 = ko.observable(false);
+  self.hasMaintLoan_162_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_239 = ko.observable(0.0);
+  self.sellingPrice_239_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_299 = ko.observable(0.0);
+  self.privateDebt_299_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_275() - self.privateDebt_341());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364_readonly = true;
+  self.valueResidue_364_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+ldHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_162_visible">
+    <label for="hasMaintLoan_162">Did you enter a loan?</label>
+    <input name="hasMaintLoan_162" id="hasMaintLoan_162" type="checkbox" data-bind="checked: hasMaintLoan_162" />
+  </li>
+  <li data-bind="visible: sellingPrice_239_visible">
+    <label for="sellingPrice_239">What was the selling price?</label>
+    <input name="sellingPrice_239" id="sellingPrice_239" type="text" data-bind="value: sellingPrice_239" />
+  </li>
+  <li data-bind="visible: privateDebt_299_visible">
+    <label for="privateDebt_299">Private debts for the sold house:</label>
+    <input name="privateDebt_299" id="privateDebt_299" type="text" data-bind="value: privateDebt_299" />
+  </li>
+  <li data-bind="visible: valueResidue_364_visible">
+    <label for="valueResidue_364">Value residue:</label>
+    <input name="valueResidue_364" id="valueResidue_364" type="text" data-bind="value: valueResidue_364" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_162 = ko.observable(false);
+  self.hasMaintLoan_162_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_239 = ko.observable(0.0);
+  self.sellingPrice_239_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_299 = ko.observable(0.0);
+  self.privateDebt_299_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_275() - self.privateDebt_341());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364_readonly = true;
+  self.valueResidue_364_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+ldHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_162_visible">
+    <label for="hasMaintLoan_162">Did you enter a loan?</label>
+    <input name="hasMaintLoan_162" id="hasMaintLoan_162" type="checkbox" data-bind="checked: hasMaintLoan_162" />
+  </li>
+  <li data-bind="visible: sellingPrice_239_visible">
+    <label for="sellingPrice_239">What was the selling price?</label>
+    <input name="sellingPrice_239" id="sellingPrice_239" type="text" data-bind="value: sellingPrice_239" />
+  </li>
+  <li data-bind="visible: privateDebt_299_visible">
+    <label for="privateDebt_299">Private debts for the sold house:</label>
+    <input name="privateDebt_299" id="privateDebt_299" type="text" data-bind="value: privateDebt_299" />
+  </li>
+  <li data-bind="visible: valueResidue_364_visible">
+    <label for="valueResidue_364">Value residue:</label>
+    <input name="valueResidue_364" id="valueResidue_364" type="text" data-bind="value: valueResidue_364" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_162 = ko.observable(false);
+  self.hasMaintLoan_162_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_239 = ko.observable(0.0);
+  self.sellingPrice_239_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_299 = ko.observable(0.0);
+  self.privateDebt_299_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_275() - self.privateDebt_341());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364_readonly = true;
+  self.valueResidue_364_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+ldHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_162_visible">
+    <label for="hasMaintLoan_162">Did you enter a loan?</label>
+    <input name="hasMaintLoan_162" id="hasMaintLoan_162" type="checkbox" data-bind="checked: hasMaintLoan_162" />
+  </li>
+  <li data-bind="visible: sellingPrice_239_visible">
+    <label for="sellingPrice_239">What was the selling price?</label>
+    <input name="sellingPrice_239" id="sellingPrice_239" type="text" data-bind="value: sellingPrice_239" />
+  </li>
+  <li data-bind="visible: privateDebt_299_visible">
+    <label for="privateDebt_299">Private debts for the sold house:</label>
+    <input name="privateDebt_299" id="privateDebt_299" type="text" data-bind="value: privateDebt_299" />
+  </li>
+  <li data-bind="visible: valueResidue_364_visible">
+    <label for="valueResidue_364">Value residue:</label>
+    <input name="valueResidue_364" id="valueResidue_364" type="text" data-bind="value: valueResidue_364" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_162 = ko.observable(false);
+  self.hasMaintLoan_162_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_239 = ko.observable(0.0);
+  self.sellingPrice_239_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_299 = ko.observable(0.0);
+  self.privateDebt_299_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_275() - self.privateDebt_341());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364_readonly = true;
+  self.valueResidue_364_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+ldHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_162_visible">
+    <label for="hasMaintLoan_162">Did you enter a loan?</label>
+    <input name="hasMaintLoan_162" id="hasMaintLoan_162" type="checkbox" data-bind="checked: hasMaintLoan_162" />
+  </li>
+  <li data-bind="visible: sellingPrice_239_visible">
+    <label for="sellingPrice_239">What was the selling price?</label>
+    <input name="sellingPrice_239" id="sellingPrice_239" type="text" data-bind="value: sellingPrice_239" />
+  </li>
+  <li data-bind="visible: privateDebt_299_visible">
+    <label for="privateDebt_299">Private debts for the sold house:</label>
+    <input name="privateDebt_299" id="privateDebt_299" type="text" data-bind="value: privateDebt_299" />
+  </li>
+  <li data-bind="visible: valueResidue_364_visible">
+    <label for="valueResidue_364">Value residue:</label>
+    <input name="valueResidue_364" id="valueResidue_364" type="text" data-bind="value: valueResidue_364" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_162 = ko.observable(false);
+  self.hasMaintLoan_162_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_239 = ko.observable(0.0);
+  self.sellingPrice_239_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_299 = ko.observable(0.0);
+  self.privateDebt_299_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_275() - self.privateDebt_341());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364_readonly = true;
+  self.valueResidue_364_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+ldHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_101_visible">
+    <label for="hasBoughtHouse_101">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_101" id="hasBoughtHouse_101" type="checkbox" data-bind="checked: hasBoughtHouse_101" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_162_visible">
+    <label for="hasMaintLoan_162">Did you enter a loan?</label>
+    <input name="hasMaintLoan_162" id="hasMaintLoan_162" type="checkbox" data-bind="checked: hasMaintLoan_162" />
+  </li>
+  <li data-bind="visible: sellingPrice_239_visible">
+    <label for="sellingPrice_239">What was the selling price?</label>
+    <input name="sellingPrice_239" id="sellingPrice_239" type="text" data-bind="value: sellingPrice_239" />
+  </li>
+  <li data-bind="visible: privateDebt_299_visible">
+    <label for="privateDebt_299">Private debts for the sold house:</label>
+    <input name="privateDebt_299" id="privateDebt_299" type="text" data-bind="value: privateDebt_299" />
+  </li>
+  <li data-bind="visible: valueResidue_364_visible">
+    <label for="valueResidue_364">Value residue:</label>
+    <input name="valueResidue_364" id="valueResidue_364" type="text" data-bind="value: valueResidue_364" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_101 = ko.observable(false);
+  self.hasBoughtHouse_101_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_162 = ko.observable(false);
+  self.hasMaintLoan_162_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_239 = ko.observable(0.0);
+  self.sellingPrice_239_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_299 = ko.observable(0.0);
+  self.privateDebt_299_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_275() - self.privateDebt_341());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_364_readonly = true;
+  self.valueResidue_364_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+ldHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_93_visible">
+    <label for="hasBoughtHouse_93">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_93" id="hasBoughtHouse_93" type="checkbox" data-bind="checked: hasBoughtHouse_93" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_154_visible">
+    <label for="hasMaintLoan_154">Did you enter a loan?</label>
+    <input name="hasMaintLoan_154" id="hasMaintLoan_154" type="checkbox" data-bind="checked: hasMaintLoan_154" />
+  </li>
+  <li data-bind="visible: sellingPrice_231_visible">
+    <label for="sellingPrice_231">What was the selling price?</label>
+    <input name="sellingPrice_231" id="sellingPrice_231" type="text" data-bind="value: sellingPrice_231" />
+  </li>
+  <li data-bind="visible: privateDebt_291_visible">
+    <label for="privateDebt_291">Private debts for the sold house:</label>
+    <input name="privateDebt_291" id="privateDebt_291" type="text" data-bind="value: privateDebt_291" />
+  </li>
+  <li data-bind="visible: valueResidue_356_visible">
+    <label for="valueResidue_356">Value residue:</label>
+    <input name="valueResidue_356" id="valueResidue_356" type="text" data-bind="value: valueResidue_356" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_93 = ko.observable(false);
+  self.hasBoughtHouse_93_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_154 = ko.observable(false);
+  self.hasMaintLoan_154_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_231 = ko.observable(0.0);
+  self.sellingPrice_231_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_291 = ko.observable(0.0);
+  self.privateDebt_291_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_356 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_267() - self.privateDebt_333());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_356_readonly = true;
+  self.valueResidue_356_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+e="hasSoldHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_93_visible">
+    <label for="hasBoughtHouse_93">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_93" id="hasBoughtHouse_93" type="checkbox" data-bind="checked: hasBoughtHouse_93" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_154_visible">
+    <label for="hasMaintLoan_154">Did you enter a loan?</label>
+    <input name="hasMaintLoan_154" id="hasMaintLoan_154" type="checkbox" data-bind="checked: hasMaintLoan_154" />
+  </li>
+  <li data-bind="visible: sellingPrice_231_visible">
+    <label for="sellingPrice_231">What was the selling price?</label>
+    <input name="sellingPrice_231" id="sellingPrice_231" type="text" data-bind="value: sellingPrice_231" />
+  </li>
+  <li data-bind="visible: privateDebt_291_visible">
+    <label for="privateDebt_291">Private debts for the sold house:</label>
+    <input name="privateDebt_291" id="privateDebt_291" type="text" data-bind="value: privateDebt_291" />
+  </li>
+  <li data-bind="visible: valueResidue_356_visible">
+    <label for="valueResidue_356">Value residue:</label>
+    <input name="valueResidue_356" id="valueResidue_356" type="text" data-bind="value: valueResidue_356" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_93 = ko.observable(false);
+  self.hasBoughtHouse_93_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_154 = ko.observable(false);
+  self.hasMaintLoan_154_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_231 = ko.observable(0.0);
+  self.sellingPrice_231_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_291 = ko.observable(0.0);
+  self.privateDebt_291_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_356 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_267() - self.privateDebt_333());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_356_readonly = true;
+  self.valueResidue_356_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+e="hasSoldHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_93_visible">
+    <label for="hasBoughtHouse_93">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_93" id="hasBoughtHouse_93" type="checkbox" data-bind="checked: hasBoughtHouse_93" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_154_visible">
+    <label for="hasMaintLoan_154">Did you enter a loan?</label>
+    <input name="hasMaintLoan_154" id="hasMaintLoan_154" type="checkbox" data-bind="checked: hasMaintLoan_154" />
+  </li>
+  <li data-bind="visible: sellingPrice_231_visible">
+    <label for="sellingPrice_231">What was the selling price?</label>
+    <input name="sellingPrice_231" id="sellingPrice_231" type="text" data-bind="value: sellingPrice_231" />
+  </li>
+  <li data-bind="visible: privateDebt_291_visible">
+    <label for="privateDebt_291">Private debts for the sold house:</label>
+    <input name="privateDebt_291" id="privateDebt_291" type="text" data-bind="value: privateDebt_291" />
+  </li>
+  <li data-bind="visible: valueResidue_356_visible">
+    <label for="valueResidue_356">Value residue:</label>
+    <input name="valueResidue_356" id="valueResidue_356" type="checkbox" data-bind="checked: valueResidue_356" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_93 = ko.observable(false);
+  self.hasBoughtHouse_93_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_154 = ko.observable(false);
+  self.hasMaintLoan_154_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_231 = ko.observable(0.0);
+  self.sellingPrice_231_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_291 = ko.observable(0.0);
+  self.privateDebt_291_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_356 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_267() - self.privateDebt_333());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_356_readonly = true;
+  self.valueResidue_356_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+"hasSoldHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_93_visible">
+    <label for="hasBoughtHouse_93">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_93" id="hasBoughtHouse_93" type="checkbox" data-bind="checked: hasBoughtHouse_93" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_154_visible">
+    <label for="hasMaintLoan_154">Did you enter a loan?</label>
+    <input name="hasMaintLoan_154" id="hasMaintLoan_154" type="checkbox" data-bind="checked: hasMaintLoan_154" />
+  </li>
+  <li data-bind="visible: sellingPrice_231_visible">
+    <label for="sellingPrice_231">What was the selling price?</label>
+    <input name="sellingPrice_231" id="sellingPrice_231" type="text" data-bind="value: sellingPrice_231" />
+  </li>
+  <li data-bind="visible: privateDebt_291_visible">
+    <label for="privateDebt_291">Private debts for the sold house:</label>
+    <input name="privateDebt_291" id="privateDebt_291" type="text" data-bind="value: privateDebt_291" />
+  </li>
+  <li data-bind="visible: valueResidue_356_visible">
+    <label for="valueResidue_356">Value residue:</label>
+    <input name="valueResidue_356" id="valueResidue_356" type="checkbox" data-bind="checked: valueResidue_356" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_93 = ko.observable(false);
+  self.hasBoughtHouse_93_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_154 = ko.observable(false);
+  self.hasMaintLoan_154_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_231 = ko.observable(0.0);
+  self.sellingPrice_231_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_291 = ko.observable(0.0);
+  self.privateDebt_291_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_356 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_267() - self.privateDebt_333());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_356_readonly = true;
+  self.valueResidue_356_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+"hasSoldHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_93_visible">
+    <label for="hasBoughtHouse_93">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_93" id="hasBoughtHouse_93" type="checkbox" data-bind="checked: hasBoughtHouse_93" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_154_visible">
+    <label for="hasMaintLoan_154">Did you enter a loan?</label>
+    <input name="hasMaintLoan_154" id="hasMaintLoan_154" type="checkbox" data-bind="checked: hasMaintLoan_154" />
+  </li>
+  <li data-bind="visible: sellingPrice_231_visible">
+    <label for="sellingPrice_231">What was the selling price?</label>
+    <input name="sellingPrice_231" id="sellingPrice_231" type="text" data-bind="value: sellingPrice_231" />
+  </li>
+  <li data-bind="visible: privateDebt_291_visible">
+    <label for="privateDebt_291">Private debts for the sold house:</label>
+    <input name="privateDebt_291" id="privateDebt_291" type="text" data-bind="value: privateDebt_291" />
+  </li>
+  <li data-bind="visible: valueResidue_356_visible">
+    <label for="valueResidue_356">Value residue:</label>
+    <input name="valueResidue_356" id="valueResidue_356" type="checkbox" data-bind="checked: valueResidue_356" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_93 = ko.observable(false);
+  self.hasBoughtHouse_93_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_154 = ko.observable(false);
+  self.hasMaintLoan_154_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_231 = ko.observable(0.0);
+  self.sellingPrice_231_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_291 = ko.observable(0.0);
+  self.privateDebt_291_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_356 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_267() - self.privateDebt_333());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_356_readonly = true;
+  self.valueResidue_356_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+"hasSoldHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_93_visible">
+    <label for="hasBoughtHouse_93">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_93" id="hasBoughtHouse_93" type="checkbox" data-bind="checked: hasBoughtHouse_93" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_154_visible">
+    <label for="hasMaintLoan_154">Did you enter a loan?</label>
+    <input name="hasMaintLoan_154" id="hasMaintLoan_154" type="checkbox" data-bind="checked: hasMaintLoan_154" />
+  </li>
+  <li data-bind="visible: sellingPrice_231_visible">
+    <label for="sellingPrice_231">What was the selling price?</label>
+    <input name="sellingPrice_231" id="sellingPrice_231" type="text" data-bind="value: sellingPrice_231" />
+  </li>
+  <li data-bind="visible: privateDebt_291_visible">
+    <label for="privateDebt_291">Private debts for the sold house:</label>
+    <input name="privateDebt_291" id="privateDebt_291" type="text" data-bind="value: privateDebt_291" />
+  </li>
+  <li data-bind="visible: valueResidue_356_visible">
+    <label for="valueResidue_356">Value residue:</label>
+    <input name="valueResidue_356" id="valueResidue_356" type="text" data-bind="value: valueResidue_356" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_93 = ko.observable(false);
+  self.hasBoughtHouse_93_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_154 = ko.observable(false);
+  self.hasMaintLoan_154_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_231 = ko.observable(0.0);
+  self.sellingPrice_231_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_291 = ko.observable(0.0);
+  self.privateDebt_291_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_356 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_267() - self.privateDebt_333());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_356_readonly = true;
+  self.valueResidue_356_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+e="hasSoldHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_93_visible">
+    <label for="hasBoughtHouse_93">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_93" id="hasBoughtHouse_93" type="checkbox" data-bind="checked: hasBoughtHouse_93" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_154_visible">
+    <label for="hasMaintLoan_154">Did you enter a loan?</label>
+    <input name="hasMaintLoan_154" id="hasMaintLoan_154" type="checkbox" data-bind="checked: hasMaintLoan_154" />
+  </li>
+  <li data-bind="visible: sellingPrice_235_visible">
+    <label for="sellingPrice_235">What was the selling price?</label>
+    <input name="sellingPrice_235" id="sellingPrice_235" type="text" data-bind="value: sellingPrice_235" />
+  </li>
+  <li data-bind="visible: privateDebt_295_visible">
+    <label for="privateDebt_295">Private debts for the sold house:</label>
+    <input name="privateDebt_295" id="privateDebt_295" type="text" data-bind="value: privateDebt_295" />
+  </li>
+  <li data-bind="visible: valueResidue_360_visible">
+    <label for="valueResidue_360">Value residue:</label>
+    <input name="valueResidue_360" id="valueResidue_360" type="text" data-bind="value: valueResidue_360" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_93 = ko.observable(false);
+  self.hasBoughtHouse_93_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_154 = ko.observable(false);
+  self.hasMaintLoan_154_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_235 = ko.observable(0.0);
+  self.sellingPrice_235_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_295 = ko.observable(0.0);
+  self.privateDebt_295_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_360 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_271() - self.privateDebt_337());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_360_readonly = true;
+  self.valueResidue_360_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+asSoldHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_93_visible">
+    <label for="hasBoughtHouse_93">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_93" id="hasBoughtHouse_93" type="checkbox" data-bind="checked: hasBoughtHouse_93" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_154_visible">
+    <label for="hasMaintLoan_154">Did you enter a loan?</label>
+    <input name="hasMaintLoan_154" id="hasMaintLoan_154" type="checkbox" data-bind="checked: hasMaintLoan_154" />
+  </li>
+  <li data-bind="visible: sellingPrice_235_visible">
+    <label for="sellingPrice_235">What was the selling price?</label>
+    <input name="sellingPrice_235" id="sellingPrice_235" type="text" data-bind="value: sellingPrice_235" />
+  </li>
+  <li data-bind="visible: privateDebt_295_visible">
+    <label for="privateDebt_295">Private debts for the sold house:</label>
+    <input name="privateDebt_295" id="privateDebt_295" type="text" data-bind="value: privateDebt_295" />
+  </li>
+  <li data-bind="visible: valueResidue_360_visible">
+    <label for="valueResidue_360">Value residue:</label>
+    <input name="valueResidue_360" id="valueResidue_360" type="text" data-bind="value: valueResidue_360" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_93 = ko.observable(false);
+  self.hasBoughtHouse_93_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_154 = ko.observable(false);
+  self.hasMaintLoan_154_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_235 = ko.observable(0.0);
+  self.sellingPrice_235_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_295 = ko.observable(0.0);
+  self.privateDebt_295_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_360 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_271() - self.privateDebt_337());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_360_readonly = true;
+  self.valueResidue_360_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_69();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+asSoldHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_93_visible">
+    <label for="hasBoughtHouse_93">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_93" id="hasBoughtHouse_93" type="checkbox" data-bind="checked: hasBoughtHouse_93" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_154_visible">
+    <label for="hasMaintLoan_154">Did you enter a loan?</label>
+    <input name="hasMaintLoan_154" id="hasMaintLoan_154" type="checkbox" data-bind="checked: hasMaintLoan_154" />
+  </li>
+  <li data-bind="visible: sellingPrice_235_visible">
+    <label for="sellingPrice_235">What was the selling price?</label>
+    <input name="sellingPrice_235" id="sellingPrice_235" type="text" data-bind="value: sellingPrice_235" />
+  </li>
+  <li data-bind="visible: privateDebt_295_visible">
+    <label for="privateDebt_295">Private debts for the sold house:</label>
+    <input name="privateDebt_295" id="privateDebt_295" type="text" data-bind="value: privateDebt_295" />
+  </li>
+  <li data-bind="visible: valueResidue_360_visible">
+    <label for="valueResidue_360">Value residue:</label>
+    <input name="valueResidue_360" id="valueResidue_360" type="text" data-bind="value: valueResidue_360" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_93 = ko.observable(false);
+  self.hasBoughtHouse_93_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_154 = ko.observable(false);
+  self.hasMaintLoan_154_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_235 = ko.observable(0.0);
+  self.sellingPrice_235_visible = ko.computed(function() {
     console.log("Computing: true && hasSoldHouse\n");
     return true && self.hasSoldHouse_27();
   }, self, {deferEvaluation: true});
+  self.privateDebt_295 = ko.observable(0.0);
+  self.privateDebt_295_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_27();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_360 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_235() - self.privateDebt_295());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_360_readonly = true;
+  self.valueResidue_360_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_27();
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new taxOfficeExample$model());
+});
+    </script>
+  </body>    
+</html>
+
+asSoldHouse_27" id="hasSoldHouse_27" type="checkbox" data-bind="checked: hasSoldHouse_27" />
+  </li>
+  <li data-bind="visible: hasBoughtHouse_93_visible">
+    <label for="hasBoughtHouse_93">Did you buy a house in 2010?</label>
+    <input name="hasBoughtHouse_93" id="hasBoughtHouse_93" type="checkbox" data-bind="checked: hasBoughtHouse_93" />
+  </li>
+  <li data-bind="visible: hasMaintLoan_154_visible">
+    <label for="hasMaintLoan_154">Did you enter a loan?</label>
+    <input name="hasMaintLoan_154" id="hasMaintLoan_154" type="checkbox" data-bind="checked: hasMaintLoan_154" />
+  </li>
+  <li data-bind="visible: sellingPrice_235_visible">
+    <label for="sellingPrice_235">What was the selling price?</label>
+    <input name="sellingPrice_235" id="sellingPrice_235" type="text" data-bind="value: sellingPrice_235" />
+  </li>
+  <li data-bind="visible: privateDebt_295_visible">
+    <label for="privateDebt_295">Private debts for the sold house:</label>
+    <input name="privateDebt_295" id="privateDebt_295" type="text" data-bind="value: privateDebt_295" />
+  </li>
+  <li data-bind="visible: valueResidue_360_visible">
+    <label for="valueResidue_360">Value residue:</label>
+    <input name="valueResidue_360" id="valueResidue_360" type="text" data-bind="value: valueResidue_360" />
+  </li>
   
-  self.$page = ko.observable(0);
-  self.$prevPage = function () {
-    if (self.$page() > 0)  
-     self.$page(self.$page() - 1);
-  };
-  self.$nextPage = function () {
-    if (self.$page() < 1)  
-     self.$page(self.$page() + 1);
-  };
-  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function taxOfficeExample$model() {
+  var self = this;
+  self.hasSoldHouse_27 = ko.observable(false);
+  self.hasSoldHouse_27_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasBoughtHouse_93 = ko.observable(false);
+  self.hasBoughtHouse_93_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.hasMaintLoan_154 = ko.observable(false);
+  self.hasMaintLoan_154_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.sellingPrice_235 = ko.observable(0.0);
+  self.sellingPrice_235_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_27();
+  }, self, {deferEvaluation: true});
+  self.privateDebt_295 = ko.observable(0.0);
+  self.privateDebt_295_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_27();
+  }, self, {deferEvaluation: true});
+  self.valueResidue_360 = ko.computed(function() {
+    console.log("Computing: (sellingPrice - privateDebt)\n");
+    return (self.sellingPrice_235() - self.privateDebt_295());
+  }, self, {deferEvaluation: true});
+  self.valueResidue_360_readonly = true;
+  self.valueResidue_360_visible = ko.computed(function() {
+    console.log("Computing: true && hasSoldHouse\n");
+    return true && self.hasSoldHouse_27();
+  }, self, {deferEvaluation: true});
 }
 $(document).ready(function() {
    ko.applyBindings(new taxOfficeExample$model());

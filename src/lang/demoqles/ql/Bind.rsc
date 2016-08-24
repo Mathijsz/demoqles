@@ -6,44 +6,81 @@ import Message;
 import IO;
 import ParseTree;
 import List;
+import Set;
 
-anno set[QLType] Expr@\types;
+alias Use = rel[loc use, loc def];
+alias Def = rel[loc def, QLType typ];
 
-// should not be needed 
-anno bool Question@redecl;
+alias Refs = tuple[Use use, Def def];
+alias Labels = rel[Label label, loc question];
+alias Info = tuple[Refs refs, Labels labels];
 
-// Bug:
-//start[Form] bind(start[Form] f) {
-Form bind(Form f, rel[str,loc, QLType] defs) {
-  str types2str(set[QLType] ts) = intercalate(", ", [ type2str(t) | t <- ts ]);
-  return visit (f) {
-    case Expr e:(Expr)`<Id name>`: {
-      x = "<e.name>";
-      locs = defs<0,1>[x];
-      types = defs<0,2>[x];
-      insert e[@links=locs][@types=types][@doc=types2str(types)];
-    } 
-  }
-}
-
-tuple[Form, rel[str, loc, QLType]] definitions(Form f) {
-  defs = {};
+Info resolve(Form f) {
+  // Lazy because of declare after use.
+  map[loc, set[loc]()] useLazy = ();
+  Def def = {};
+  Labels labels = {};
   
-  Question addDef(Question q, Var x, Type t) {
-    s = "<x>";
-    qt = qlType(t);
-    if (<s, _, qt2> <- defs, qt2 != qt) {
-      q@redecl = true;
+  rel[Id, loc] env = {};    
+  
+  // Return a function that looks up declaration of `n` in defs when called.
+  set[loc]() lookup(Id n) = set[loc]() { return env[n]; };
+
+
+  void addUse(loc l, Id name) {
+    useLazy[l] = lookup(name);
+  }
+  
+  void addLabel(Label label, loc l) {
+    labels += {<label, l>};
+  }
+  
+  void addDef(Id n, loc q, Type t) {
+    env += {<n, q>};
+    def += {<q, qlType(t)>};
+  }
+  
+  visit (f) {
+    case Embed emb:
+      println("Embed: <emb>");
+      
+    case Expr e:(Expr)`<Id x>`:
+      addUse(x@\loc, x); 
+    
+    case q:(Question)`<Label l> <Id x>: <Type t>`: {
+      addLabel(l, x@\loc);
+      addDef(x, x@\loc, t);
     }
-    defs += {<s, q@\loc, qt>};
-    return q;
+
+    case q:(Question)`<Label l> <Id x>: <Type t> <Value _>`: {
+      addLabel(l, x@\loc);
+      addDef(x, x@\loc, t);
+    }
+      
+    case q:(Question)`<Label l> <Id x>: <Type t> = <Expr e>`: {
+      addLabel(l, x@\loc); 
+      addDef(x, x@\loc, t);
+    }
+    
+    case q:(Question)`<Label l> <Id x>: <Type t> = <Expr e> <Value _>`: {
+      addLabel(l, x@\loc); 
+      addDef(x, x@\loc, t);
+    }
   }
   
-  f = top-down visit (f) {
-    case q:(Question)`<Label l> <Var x>: <Type t>` => addDef(q, x, t)
-    case q:(Question)`<Label l> <Var x>: <Type t> = <Expr e>` => addDef(q, x, t)
-  }
-
-  return <f, defs>;
+  // Force the closures in `use` to resolve references.
+  use = { <u, d> | u <- useLazy, d <- useLazy[u]() };
+  
+  return <<use, def>, labels>;
 }
+
+rel[loc,loc,str] computeXRef(Info i) 
+  = { <u, d, "<l>"> | <u, d> <- i.refs.use, <l, d> <- i.labels }; 
+
+map[loc, str] computeDocs(Info i) {
+  docs = { <u, "<l>"> | <u, d>  <- i.refs.use, <l, d> <- i.labels };
+  return ( k: intercalate("\n", toList(docs[k])) | k <- docs<0> );
+}
+  
+
 

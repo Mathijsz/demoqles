@@ -1,17 +1,23 @@
 module lang::demoqles::ql::QL
 
-extend lang::demoqles::ql::Lexical;
-
 start syntax Form
   = form: "form" Id name "{" Question* questions "}"
   ;
 
 syntax Question
-  = question: Label label Var var ":" Type type
-  | computed: Label label Var var ":" Type type "=" Expr expr
+  = question: Label label Var var ":" Type type Value? value
+  | computed: Label label Var var ":" Type type "=" Expr expr Value? value
   | ifThen: "if" "(" Expr cond ")" Question () !>> "else"
   | ifThenElse: "if" "(" Expr cond ")" Question question "else" Question elseQuestion
   | @Foldable group: "{" Question* questions "}"
+  ;
+
+syntax Value
+  = "[" Const "]"
+  ;
+  
+syntax Const
+  = @category="MetaAmbiguity" Expr!var!not!mul!div!add!sub!lt!leq!gt!geq!eq!neq!and!or
   ;
 
 syntax Expr
@@ -29,7 +35,7 @@ syntax Expr
   )
   > left (
       add: Expr "+" Expr
-    | sub: Expr "-" !>> [a-zA-Z_] Expr
+    | sub: Expr "-" Expr
   )
   > non-assoc (
       lt: Expr "\<" Expr
@@ -45,3 +51,62 @@ syntax Expr
   
 keyword Keywords = "true" | "false" ;
 
+lexical Var = Id;
+
+lexical Label = @category="Constant" label: String; 
+  
+syntax Type
+  = booleanType: "boolean" 
+  | stringType: "string"
+  | integerType: "integer"
+  | moneyType: "money"
+  ;
+
+lexical String = [\"] StrChar* [\"];
+
+lexical StrChar
+  = ![\"\\]
+  | [\\][\\\"nfbtr]
+  ;
+
+lexical Integer =  [0-9]+ !>> [0-9];
+
+lexical Money =  [0-9]+ "." [0-9]+ !>> [0-9] ;
+
+layout Standard = WhitespaceOrComment* !>> [\ \t\n\f\r] !>> "//" !>> "/*";
+  
+syntax Comment 
+  = LineComment
+  | CStart CommentChar* CEnd
+  ;
+
+lexical LineComment
+  = @category="Comment" "//" ![\n\r]* $;
+
+syntax CStart = @category="Comment" "/*";
+syntax CEnd = @category="Comment" "*/";
+
+
+syntax CommentChar 
+  = @category="Comment" ![*{}\ \t\n\f\r]
+  | @category="Comment" [*] !>> [/]
+  | Embed
+  ;
+
+syntax Embed
+  = "{" Expr expr "}"
+  ;
+
+syntax WhitespaceOrComment 
+  = whitespace: Whitespace
+  | comment: Comment
+  ;   
+
+lexical Whitespace 
+  = [\u0009-\u000D \u0020 \u0085 \u00A0 \u1680 \u180E \u2000-\u200A \u2028 \u2029 \u202F \u205F \u3000]
+  ; 
+  
+lexical Id 
+  = ([a-z A-Z 0-9 _] !<< [a-z A-Z][\-a-z A-Z 0-9 _]* !>> [a-z A-Z 0-9 _]) \ Keywords
+  ;
+  

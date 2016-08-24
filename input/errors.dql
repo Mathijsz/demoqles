@@ -12,7 +12,7 @@ form Errors {
   }
   
   
-  "An numeric value" n: money
+  "An numeric value" n: integer
   
   if (n > 0) {
      "A derived value" z: money = n + 10
@@ -20,6 +20,6 @@ form Errors {
 
   if (n < 0) {
      "A derived value" z: money = 2 * n
-  }  
+  }
   
 }

@@ -13,6 +13,7 @@ node outline(Form f) {
  list[node] es = [];
  list[node] cs = []; 
  list[node] ls = [];
+ list[node] vs = [];
  
  void addQuestion(Question q) {
    qn = "question"()[@label="<q.var>"][@\loc=q@\loc];
@@ -28,8 +29,18 @@ node outline(Form f) {
  
  top-down visit (f) {
    case q:(Question)`<Label l> <Var x>: <Type t>`: addQuestion(q);
+   case q:(Question)`<Label l> <Var x>: <Type t> [<Expr v>]`: {
+     addQuestion(q);
+     vs += ["val"()[@label="<x>: <v>"][@\loc=v@\loc]];
+   }
    case q:(Question)`<Label l> <Var x>: <Type t> = <Expr e>`: {
      addQuestion(q);
+     es += ["expr"()[@label="<e>"][@\loc=e@\loc]];
+   }
+
+   case q:(Question)`<Label l> <Var x>: <Type t> = <Expr e> [<Expr v>]`: {
+     addQuestion(q);
+     vs += ["val"()[@label="<x>: <v>"][@\loc=v@\loc]];
      es += ["expr"()[@label="<e>"][@\loc=e@\loc]];
    }
    
@@ -51,6 +62,7 @@ node outline(Form f) {
   "types"(ts)[@label="Types (<size(ts)>)"],
   "conditions"(cs)[@label="Conditions (<size(cs)>)"],
   "expressions"(es)[@label="Expressions (<size(es)>)"],
-  "labels"(ls)[@label="Labels (<size(ls)>)"]
+  "labels"(ls)[@label="Labels (<size(ls)>)"],
+  "values"(vs)[@label="Values (<size(vs)>)"]
  );
 }

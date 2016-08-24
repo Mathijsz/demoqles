@@ -2,9 +2,9 @@ module lang::demoqles::ql::Expr2JS
 
 import lang::demoqles::ql::QL;
 
-alias WrapVar = str(Expr var);
+alias WrapVar = str(Id var);
 
-str expr2js(e:(Expr)`<Id x>`, WrapVar wrap) = wrap(e); 
+str expr2js(e:(Expr)`<Id x>`, WrapVar wrap) = wrap(x); 
 str expr2js((Expr)`(<Expr e>)`, WrapVar wrap) = "(<expr2js(e, wrap)>)";
 str expr2js((Expr)`<Integer x>`, WrapVar wrap) = "<x>";
 str expr2js((Expr)`true`, WrapVar wrap) = "true";

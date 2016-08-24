@@ -3,6 +3,7 @@ module lang::demoqles::Plugin
 import lang::demoqles::ql::QL;
 import lang::demoqles::ql::Bind;
 import lang::demoqles::ql::Check;
+import lang::demoqles::ql::Eval;
 import lang::demoqles::ql::Verify;
 import lang::demoqles::ql::Outline;
 import lang::demoqles::ql::Form2HTML;
@@ -20,6 +21,8 @@ import IO;
 private str DEMO_QL ="DemoQL";
 private str DEMO_QLS ="DemoQLS";
 
+anno rel[loc, loc, str] Tree@hyperlinks;
+
 public void setupQL() {
   registerLanguage(DEMO_QL, "dql", Tree(str src, loc l) {
     return parse(#start[Form], src, l);
@@ -27,34 +30,36 @@ public void setupQL() {
   
   contribs = {
      outliner(node(Tree pt) {
-      if (Form f := pt.args[1]) {
+      if (Form f := pt.top) {
         return outline(f);
       }
       throw "Error: not a form";
     }),
     
-//    annotator(start[Form](start[Form] pt) {
     annotator(Tree(Tree pt) {
       if (Form f := pt.args[1]) {
-        f_and_defs = definitions(f);
-        f = bind(f_and_defs[0], f_and_defs[1]);
-        msgs = checkForm(f);
-        pt.args[1] = f;
-        return pt[@messages=msgs];
+        inf = resolve(f);
+        msgs = checkForm(f, inf);
+        if (msgs == {}) {
+          env = evalForm(f);
+	        for (k <- env) {
+	          println("<k>: <env[k]>");
+	        }
+        }
+        return pt[@messages=msgs][@hyperlinks=computeXRef(inf)][@docs=computeDocs(inf)];
       }
       return pt[@messages={error("BUG: not a form", pt@\loc)}];
     }),
     
     builder(set[Message] (Tree pt) {
       if (Form f := pt.args[1]) {
-        f_and_defs = definitions(f);
-        f = bind(f_and_defs[0], f_and_defs[1]);
-        msgs = checkForm(f);
+        inf = resolve(f);
+        msgs = checkForm(f, inf);
         if (msgs == {}) {
           h = pt@\loc[extension="html"];
-          writeFile(h, ql2html(f));
-          temp = pt@\loc[extension="smt2"];
-          return verifyForm(f, temp);
+          writeFile(h, ql2html(f, inf));
+          //temp = pt@\loc[extension="smt2"];
+          //return verifyForm(f, temp);
         }
         return msgs;
       }
@@ -72,8 +77,7 @@ public void setupQLS() {
   });
   
   contribs = {
-    
-//    annotator(start[Form](start[Form] pt) {
+
     annotator(Tree(Tree pt) {
        msgs = doWithSheetAndForm(pt, checkSheet);
        return pt[@messages=msgs];
