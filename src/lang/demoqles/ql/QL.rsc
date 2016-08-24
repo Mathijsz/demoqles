@@ -10,6 +10,7 @@ syntax Question
   | ifThen: "if" "(" Expr cond ")" Question () !>> "else"
   | ifThenElse: "if" "(" Expr cond ")" Question question "else" Question elseQuestion
   | @Foldable group: "{" Question* questions "}"
+  | @Foldable @category="Comment" invisible: "(" Question* questions ")"
   ;
 
 syntax Value

@@ -33,6 +33,9 @@ list[str] toFields((Question)`if (<Expr c>) <Question q1> else <Question q2>`, E
 list[str] toFields((Question)`{ <Question* qs> }`, Expr cond, Info i) 
   = ( [] | it + toFields(q, cond, i) |  q <- qs );
 
+list[str] toFields((Question)`( <Question* qs> )`, Expr cond, Info i) 
+  = ( [] | it + toFields(q, cond, i) |  q <- qs );
+
 list[str] toFields(q:(Question)`<Label l> <Var n>: <Type t> <Value _>`, Expr cond, Info i)
   = toFields((Question)`<Label l> <Var n>: <Type t>`[@\loc=q@\loc], cond, i);
 

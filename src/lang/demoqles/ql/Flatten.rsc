@@ -17,6 +17,9 @@ list[Question] flatten((Question)`if (<Expr c1>) <Question q1> else <Question q2
 list[Question] flatten((Question)`{<Question* qs>}`, Expr c)
   = ( [] | it + flatten(q, c) | q <- qs );
 
+list[Question] flatten((Question)`(<Question* qs>)`, Expr c)
+  = ( [] | it + flatten(q, c) | q <- qs );
+
 list[Question] flatten(q:(Question)`<Label l> <Var v>: <Type t>`, Expr c)
   = [(Question)`if (<Expr c>) <Question q>`];
 

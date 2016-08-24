@@ -52,9 +52,9 @@ public void setupQL() {
         msgs = checkForm(f, inf);
         if (msgs == {}) {
           env = evalForm(f);
-	        for (k <- env) {
-	          println("<k>: <env[k]>");
-	        }
+	        //for (k <- env) {
+	        //  println("<k>: <env[k]>");
+	        //}
           return patch(f, env);
         }
       }
@@ -66,7 +66,7 @@ public void setupQL() {
         inf = resolve(f);
         msgs = checkForm(f, inf);
         if (msgs == {}) {
-          h = pt@\loc[extension="html"];
+          h = pt@\loc[extension="html"].top;
           writeFile(h, ql2html(f, inf));
           //temp = pt@\loc[extension="smt2"];
           //return verifyForm(f, temp);

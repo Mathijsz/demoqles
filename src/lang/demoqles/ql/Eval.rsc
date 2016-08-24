@@ -15,6 +15,7 @@ Env initEnv(Form f) = ( x: initValue(q.\type) | /Question q := f, q has var, (Va
 
 Env userEnv(Form f) = ( x: eval(v, ()) | /(Question)`<Label _> <Id x>: <Type _> [<Expr v>]` := f );
 
+// requires absence of cycles
 Env evalForm(Form f) {
   env = initEnv(f) + userEnv(f);
   solve (env) {

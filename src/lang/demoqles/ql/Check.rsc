@@ -16,10 +16,7 @@ set[Message] checkForm(Form f, Info inf)
 set[Message] checkEmbeds(Form f, Info i) {
   msgs = {};
   visit (f) {
-     case Embed e: {
-       println("Embed in check: <e>");
-       msgs += tc(e.expr, i);
-     }
+     case Embed e: msgs += tc(e.expr, i);
   }
   return msgs;
 }
@@ -28,7 +25,6 @@ set[Message] detectCycles(Form f, Info i)
   = {};
   //{ error("Cycle involving <x>", f.name@\loc) | x <- carrier(g), <x, x> in g }
   //when g := ( {} | it + defs(q) * uses(q) | q <- flatten(f) )+;
-
 
 set[Message] tc(Form f, Info i) = ( {} | it + tc(q, i) | q <- f.questions );
 
@@ -45,6 +41,9 @@ set[Message] tc((Question)`if (<Expr c>) <Question q1> else <Question q2>`, Info
 set[Message] tc((Question)`{ <Question* qs> }`, Info i) 
   = ( {} | it + tc(q, i) |  q <- qs );
 
+set[Message] tc((Question)`( <Question* qs> )`, Info i) 
+  = ( {} | it + tc(q, i) |  q <- qs );
+
 set[Message] tcq(Label l, Id n, Info i)
   = { error("Redeclared with different type", n@\loc) | hasMultipleTypes(n@\loc, i) }
   + { warning("Duplicate label", l@\loc) | hasDuplicateLabel(l, i) }
@@ -53,7 +52,6 @@ set[Message] tcq(Label l, Id n, Info i)
 set[Message] tc(q:(Question)`<Label l> <Id n>: <Type t> = <Expr e>`, Info i)
   = tcq(l, n, i) + tc(e ,i) + 
   { error("Incompatible expression type", e@\loc) | qlTypeOf(e, i) != qlType(t) };
-
 
 set[Message] tc(q:(Question)`<Label l> <Id n>: <Type t> = <Expr e> [<Expr v>]`, Info i)
   = tcq(l, n, i) + tc(e ,i) + 
