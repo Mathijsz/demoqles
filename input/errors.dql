@@ -6,7 +6,7 @@ form Errors {
   }
   
   "Possibly undefined" y: money = x
-  
+0.0  
   if (true && false) {
     "Unreachable" u: money
   }
@@ -15,11 +15,9 @@ form Errors {
   "An numeric value" n: integer
   
   if (n > 0) {
-     "A derived value" z: money = n + 10
-  }  
+     "A derived value" z: money = n + 100.0 [0.0] }  
 
   if (n < 0) {
-     "A derived value" z: money = 2 * n
-  }
+     "A derived value" z: money = 2 * n  }
   
 }

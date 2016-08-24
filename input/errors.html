@@ -7,7 +7,96 @@
   <body>
     <ul>
   <li data-bind="visible: flag_17_visible">
-    <label for="flag_17">"A boolean"</label>
+    <label for="flag_17">A boolean</label>
+    <input name="flag_17" id="flag_17" type="checkbox" data-bind="checked: flag_17" />
+  </li>
+  <li data-bind="visible: x_64_visible">
+    <label for="x_64">A value</label>
+    <input name="x_64" id="x_64" type="text" data-bind="value: x_64" />
+  </li>
+  <li data-bind="visible: y_92_visible">
+    <label for="y_92">Possibly undefined</label>
+    <input name="y_92" id="y_92" type="text" data-bind="value: y_92" />
+  </li>
+  <li data-bind="visible: u_159_visible">
+    <label for="u_159">Unreachable</label>
+    <input name="u_159" id="u_159" type="text" data-bind="value: u_159" />
+  </li>
+  <li data-bind="visible: n_194_visible">
+    <label for="n_194">An numeric value</label>
+    <input name="n_194" id="n_194" type="text" data-bind="value: n_194" />
+  </li>
+  <li data-bind="visible: z_247_visible">
+    <label for="z_247">A derived value</label>
+    <input name="z_247" id="z_247" type="text" data-bind="value: z_247" />
+  </li>
+  <li data-bind="visible: z_311_visible">
+    <label for="z_311">A derived value</label>
+    <input name="z_311" id="z_311" type="text" data-bind="value: z_311" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function Errors$model() {
+  var self = this;
+  self.flag_17 = ko.observable(false);
+  self.flag_17_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.x_64 = ko.observable(0.0);
+  self.x_64_visible = ko.computed(function() {
+    console.log("Computing: true && flag\n");
+    return true && self.flag_29();
+  }, self, {deferEvaluation: true});
+  self.y_92 = ko.computed(function() {
+    console.log("Computing: x\n");
+    return self.x_74();
+  }, self, {deferEvaluation: true});
+  self.y_92_readonly = true;
+  self.y_92_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.u_159 = ko.observable(0.0);
+  self.u_159_visible = ko.computed(function() {
+    console.log("Computing: true && true && false\n");
+    return true && true && false;
+  }, self, {deferEvaluation: true});
+  self.n_194 = ko.observable(0);
+  self.n_194_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.z_247 = ko.computed(function() {
+    console.log("Computing: n + 10\n");
+    return self.n_213() + 10;
+  }, self, {deferEvaluation: true});
+  self.z_247_readonly = true;
+  self.z_247_visible = ko.computed(function() {
+    console.log("Computing: true && n > 0\n");
+    return true && self.n_213() > 0;
+  }, self, {deferEvaluation: true});
+  self.z_311 = ko.computed(function() {
+    console.log("Computing: 2 * n\n");
+    return 2 * self.n_213();
+  }, self, {deferEvaluation: true});
+  self.z_311_readonly = true;
+  self.z_311_visible = ko.computed(function() {
+    console.log("Computing: true && n < 0\n");
+    return true && self.n_213() < 0;
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new Errors$model());
+});
+    </script>
+  </body>    
+</html>
+
+ag_17">"A boolean"</label>
     <input name="flag_17" id="flag_17" type="checkbox" data-bind="checked: flag_17" />
   </li>
   <li data-bind="visible: x_64_visible">

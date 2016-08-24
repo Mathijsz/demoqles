@@ -7,6 +7,7 @@ import lang::demoqles::ql::Eval;
 import lang::demoqles::ql::Verify;
 import lang::demoqles::ql::Outline;
 import lang::demoqles::ql::Form2HTML;
+import lang::demoqles::ql::Patch;
 import lang::demoqles::qls::QLS;
 import lang::demoqles::qls::Check;
 import lang::demoqles::qls::Outline;
@@ -40,15 +41,24 @@ public void setupQL() {
       if (Form f := pt.args[1]) {
         inf = resolve(f);
         msgs = checkForm(f, inf);
+        return pt[@messages=msgs][@hyperlinks=computeXRef(inf)][@docs=computeDocs(inf)];
+      }
+      return pt[@messages={error("BUG: not a form", pt@\loc)}];
+    }),
+    
+    liveUpdater(lrel[loc,str] (&T<:Tree pt) {
+      if (Form f := pt.top) {
+        inf = resolve(f);
+        msgs = checkForm(f, inf);
         if (msgs == {}) {
           env = evalForm(f);
 	        for (k <- env) {
 	          println("<k>: <env[k]>");
 	        }
+          return patch(f, env);
         }
-        return pt[@messages=msgs][@hyperlinks=computeXRef(inf)][@docs=computeDocs(inf)];
       }
-      return pt[@messages={error("BUG: not a form", pt@\loc)}];
+      return [];
     }),
     
     builder(set[Message] (Tree pt) {

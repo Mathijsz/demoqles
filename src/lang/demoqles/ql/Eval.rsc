@@ -18,8 +18,11 @@ Env userEnv(Form f) = ( x: eval(v, ()) | /(Question)`<Label _> <Id x>: <Type _> 
 Env evalForm(Form f) {
   env = initEnv(f) + userEnv(f);
   solve (env) {
-    for (/(Question)`<Label _> <Id x>: <Type _> = <Expr e>` := f) {
-       env[x] = eval(e, env);    
+    visit (f) {
+      case (Question)`<Label _> <Id x>: <Type _> = <Expr e>`: 
+        env[x] = eval(e, env);
+      case (Question)`<Label _> <Id x>: <Type _> = <Expr e> <Value _>`: 
+        env[x] = eval(e, env);
     }
   }
   return env;
