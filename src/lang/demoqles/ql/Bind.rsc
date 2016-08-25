@@ -27,52 +27,59 @@ Info resolve(Form f) {
   set[loc]() lookup(Id n) = set[loc]() { return env[n]; };
 
 
-  void addUse(loc l, Id name) {
-    useLazy[l] = lookup(name);
+  void addUse(Id name) {
+    useLazy[name@\loc] = lookup(name);
   }
   
-  void addLabel(Label label, loc l) {
-    labels += {<label, l>};
+  void addLabel(Id x, Label label) {
+    labels += {<label, x@\loc>};
   }
   
-  void addDef(Id n, loc q, Type t) {
-    env += {<n, q>};
-    def += {<q, qlType(t)>};
+  void addDef(Id n, Type t) {
+    env += {<n, n@\loc>};
+    def += {<n@\loc, qlType(t)>};
   }
   
   visit (f) {
-    case Embed emb:
-      println("Embed: <emb>");
-      
-    case Expr e:(Expr)`<Id x>`:
-      addUse(x@\loc, x); 
-    
-    case q:(Question)`<Label l> <Id x>: <Type t>`: {
-      addLabel(l, x@\loc);
-      addDef(x, x@\loc, t);
-    }
-
-    case q:(Question)`<Label l> <Id x>: <Type t> <Value _>`: {
-      addLabel(l, x@\loc);
-      addDef(x, x@\loc, t);
-    }
-      
-    case q:(Question)`<Label l> <Id x>: <Type t> = <Expr e>`: {
-      addLabel(l, x@\loc); 
-      addDef(x, x@\loc, t);
-    }
-    
-    case q:(Question)`<Label l> <Id x>: <Type t> = <Expr e> <Value _>`: {
-      addLabel(l, x@\loc); 
-      addDef(x, x@\loc, t);
-    }
+    case Embed emb: println("Embed: <emb>");
+    case Expr e: resolve(e, addUse);
+    case Question q: resolve(q, addLabel, addDef);
   }
   
   // Force the closures in `use` to resolve references.
   use = { <u, d> | u <- useLazy, d <- useLazy[u]() };
-  
   return <<use, def>, labels>;
 }
+
+
+void resolve((Expr)`<Id x>`, void(Id) use) {
+  println("USE: <x>");
+  use(x);
+} 
+ 
+default void resolve(Expr _, void(Id) use) { }   
+
+void resolve((Question)`<Label l> <Id x>: <Type t>`, void(Id, Label) label, void(Id,Type) def) {
+  label(x, l);
+  def(x, t);
+}
+
+void resolve((Question)`<Label l> <Id x>: <Type t> <Value _>`, void(Id, Label) label, void(Id,Type) def) {
+  label(x, l);
+  def(x, t);
+}
+ 
+void resolve((Question)`<Label l> <Id x>: <Type t> = <Expr e>`, void(Id, Label) label, void(Id,Type) def) {
+  label(x, l);
+  def(x, t);
+}     
+ 
+void resolve((Question)`<Label l> <Id x>: <Type t> = <Expr e> <Value _>`, void(Id, Label) label, void(Id,Type) def) {
+  label(x, l);
+  def(x, t);
+}     
+
+default void resolve(Question _, void(Id, Label) label, void(Id,Type) def) {}
 
 rel[loc,loc,str] computeXRef(Info i) 
   = { <u, d, "<l>"> | <u, d> <- i.refs.use, <l, d> <- i.labels }; 

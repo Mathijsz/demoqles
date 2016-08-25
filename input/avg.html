@@ -14,9 +14,9 @@
     <label for="y_44">Second:</label>
     <input name="y_44" id="y_44" type="text" data-bind="value: y_44" />
   </li>
-  <li data-bind="visible: avg_71_visible">
-    <label for="avg_71">Average:</label>
-    <input name="avg_71" id="avg_71" type="text" data-bind="value: avg_71" />
+  <li data-bind="visible: avg_72_visible">
+    <label for="avg_72">Average:</label>
+    <input name="avg_72" id="avg_72" type="text" data-bind="value: avg_72" />
   </li>
   
 </ul>
@@ -35,12 +35,12 @@
     console.log("Computing: true\n");
     return true;
   }, self, {deferEvaluation: true});
-  self.avg_71 = ko.computed(function() {
+  self.avg_72 = ko.computed(function() {
     console.log("Computing: (x + y) / 2\n");
     return (self.x_26() + self.y_54()) / 2;
   }, self, {deferEvaluation: true});
-  self.avg_71_readonly = true;
-  self.avg_71_visible = ko.computed(function() {
+  self.avg_72_readonly = true;
+  self.avg_72_visible = ko.computed(function() {
     console.log("Computing: true\n");
     return true;
   }, self, {deferEvaluation: true});
