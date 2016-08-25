@@ -53,7 +53,6 @@ Info resolve(Form f) {
 
 
 void resolve((Expr)`<Id x>`, void(Id) use) {
-  println("USE: <x>");
   use(x);
 } 
  

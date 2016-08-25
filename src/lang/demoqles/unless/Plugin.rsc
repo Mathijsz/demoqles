@@ -6,7 +6,7 @@ import lang::demoqles::unless::Check;
 import lang::demoqles::ql::Eval;
 import lang::demoqles::ql::Outline;
 import lang::demoqles::unless::Form2HTML;
-import lang::demoqles::ql::Patch;
+import lang::demoqles::unless::Patch;
 
 
 import ParseTree;
