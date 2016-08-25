@@ -57,6 +57,12 @@ value eval((Expr)`<Expr lhs> * <Expr rhs>`, Env env)
 value eval((Expr)`<Expr lhs> / <Expr rhs>`, Env env)
   =  v1 / v2
   when 
+    int v1 := eval(lhs, env),
+    int v2 := eval(rhs, env);
+
+default value eval((Expr)`<Expr lhs> / <Expr rhs>`, Env env)
+  =  v1 / v2
+  when 
     num v1 := eval(lhs, env),
     num v2 := eval(rhs, env);
     

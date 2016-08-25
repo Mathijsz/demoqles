@@ -72,7 +72,7 @@ lexical StrChar
 
 lexical Integer =  [\-]? [0-9]+ !>> [0-9];
 
-lexical Money =  [\-]? [0-9]+ "." [0-9]+ !>> [0-9] ;
+lexical Money =  [\-]? [0-9]+ "." [0-9]* !>> [0-9] ;
 
 layout Standard = WhitespaceOrComment* !>> [\ \t\n\f\r] !>> "//" !>> "/*";
   

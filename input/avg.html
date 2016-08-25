@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <title>Average</title>
+    <link rel="stylesheet" type="text/css" href="file:///Users/tvdstorm/CWI/muql/src/lang/demoqles/ql.css" />
+    <link rel="stylesheet" type="text/css" href="file:///Users/tvdstorm/CWI/muql/src/lang/demoqles/basic.css" />
+  </head>
+  <body>
+    <ul>
+  <li data-bind="visible: x_17_visible">
+    <label for="x_17">First:</label>
+    <input name="x_17" id="x_17" type="text" data-bind="value: x_17" />
+  </li>
+  <li data-bind="visible: y_44_visible">
+    <label for="y_44">Second:</label>
+    <input name="y_44" id="y_44" type="text" data-bind="value: y_44" />
+  </li>
+  <li data-bind="visible: avg_71_visible">
+    <label for="avg_71">Average:</label>
+    <input name="avg_71" id="avg_71" type="text" data-bind="value: avg_71" />
+  </li>
+  
+</ul>
+    <script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+    <script>
+    function Average$model() {
+  var self = this;
+  self.x_17 = ko.observable(0);
+  self.x_17_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.y_44 = ko.observable(0);
+  self.y_44_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+  self.avg_71 = ko.computed(function() {
+    console.log("Computing: (x + y) / 2\n");
+    return (self.x_26() + self.y_54()) / 2;
+  }, self, {deferEvaluation: true});
+  self.avg_71_readonly = true;
+  self.avg_71_visible = ko.computed(function() {
+    console.log("Computing: true\n");
+    return true;
+  }, self, {deferEvaluation: true});
+}
+$(document).ready(function() {
+   ko.applyBindings(new Average$model());
+});
+    </script>
+  </body>    
+</html>
+
