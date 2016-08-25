@@ -28,15 +28,15 @@ set[Message] detectCycles(Form f, Info i)
 
 set[Message] tc(Form f, Info i) = ( {} | it + tc(q, i) | q <- f.questions );
 
-set[Message] tci(Expr c, Info i) 
+set[Message] tcCond(Expr c, Info i) 
   = { error("Condition should be boolean", c@\loc) | qlTypeOf(c, i) != boolean() }
   + tc(c, i);
 
 set[Message] tc((Question)`if (<Expr c>) <Question q>`, Info i) 
-  = tci(c, i) + tc(q, i);
+  = tcCond(c, i) + tc(q, i);
 
 set[Message] tc((Question)`if (<Expr c>) <Question q1> else <Question q2>`, Info i)
-  = tci(c, i) + tc(q1, i) + tc(q2, i);
+  = tcCond(c, i) + tc(q1, i) + tc(q2, i);
 
 set[Message] tc((Question)`{ <Question* qs> }`, Info i) 
   = ( {} | it + tc(q, i) |  q <- qs );
