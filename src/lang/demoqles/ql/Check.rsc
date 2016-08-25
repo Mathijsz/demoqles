@@ -2,7 +2,7 @@ module lang::demoqles::ql::Check
 
 import lang::demoqles::ql::Types;
 import lang::demoqles::ql::QL;
-import lang::demoqles::ql::Bind;
+import lang::demoqles::ql::Bind; // only for Info
 import lang::demoqles::ql::Flatten;
 import Message;
 import ParseTree;
@@ -70,7 +70,6 @@ bool hasMultipleTypes(loc x, Info i) = size(i.refs.def[x]) > 1;
 
 bool hasDuplicateLabel(Label l, Info i) = size(i.labels[l]) > 1;
 
-  
 
 default set[Message] tc(Expr _, Info i) = {};
 
@@ -78,7 +77,7 @@ set[Message] tc((Expr)`<Id x>`, Info i)
   = { error("Undefined question", x@\loc) | x@\loc notin i.refs.use<0> };
   
 set[Message] tc((Expr)`(<Expr e>)`, Info i) = tc(e, i);
-set[Message] tc(n:(Expr)`!<Expr e>`, Info i) = tc(n, checkBoolean, e);
+set[Message] tc(n:(Expr)`!<Expr e>`, Info i) = tc(n, checkBoolean, i, e);
 set[Message] tc(e:(Expr)`<Expr lhs> * <Expr rhs>`, Info i) = tc(e, checkNumeric, i, lhs, rhs);
 set[Message] tc(e:(Expr)`<Expr lhs> / <Expr rhs>`, Info i) = tc(e, checkNumeric, i, lhs, rhs);
 set[Message] tc(e:(Expr)`<Expr lhs> + <Expr rhs>`, Info i) = tc(e, checkNumeric, i, lhs, rhs);

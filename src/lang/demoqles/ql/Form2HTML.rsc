@@ -3,7 +3,6 @@ module lang::demoqles::ql::Form2HTML
 import lang::demoqles::ql::Types;
 import lang::demoqles::ql::QL;
 import lang::demoqles::ql::Expr2JS;
-import lang::demoqles::ql::Form2Model;
 import lang::demoqles::ql::Bind;
 import IO;
 import ParseTree;
@@ -20,8 +19,6 @@ loc TEMPLATE = |project://demoqles/src/lang/demoqles/template.html|;
 
 str qName(Question q) = "<q.var>_<q@\loc.offset>";
 str qLabel(Question q) = "<q.label>"[1..-1];
-
-str ql2html(Form f, Info i) = form2html(f, i, form2items, form2model);
 
 // requires bindings on f.
 str form2html(Form f, Info i, str(Form) items, str(Form, str, Info) model) {

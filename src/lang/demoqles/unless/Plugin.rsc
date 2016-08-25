@@ -1,12 +1,13 @@
 module lang::demoqles::unless::Plugin
 
 import lang::demoqles::unless::Unless;
-import lang::demoqles::ql::Bind;
 import lang::demoqles::unless::Check;
+import lang::demoqles::unless::Form2Model;
+import lang::demoqles::unless::Patch;
+import lang::demoqles::ql::Bind;
 import lang::demoqles::ql::Eval;
 import lang::demoqles::ql::Outline;
-import lang::demoqles::unless::Form2HTML;
-import lang::demoqles::unless::Patch;
+import lang::demoqles::ql::Form2HTML;
 
 
 import ParseTree;
@@ -18,7 +19,10 @@ private str DEMO_QL ="DemoQL+unless";
 
 anno rel[loc, loc, str] Tree@hyperlinks;
 
-public void setupQL() {
+str ql2html(Form f, Info i) = form2html(f, i, form2items, form2model);
+
+
+public void setupQLWithUnless() {
   bool doVisibility = false;
   
   registerLanguage(DEMO_QL, "dql-unless", Tree(str src, loc l) {
