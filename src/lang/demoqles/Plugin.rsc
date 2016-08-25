@@ -25,6 +25,8 @@ private str DEMO_QLS ="DemoQLS";
 anno rel[loc, loc, str] Tree@hyperlinks;
 
 public void setupQL() {
+  bool doVisibility = false;
+  
   registerLanguage(DEMO_QL, "dql", Tree(str src, loc l) {
     return parse(#start[Form], src, l);
   });
@@ -55,11 +57,16 @@ public void setupQL() {
 	        //for (k <- env) {
 	        //  println("<k>: <env[k]>");
 	        //}
-          return patch(f, env);
+          return patch(f, env, doVisibility);
         }
       }
       return [];
     }),
+    
+    menu(menu("Demoqles", [
+        toggle("Visualize visibility", 
+          bool() { return doVisibility; }, 
+          void((&T<:Tree) tree, loc selection) { doVisibility = !doVisibility; })])),
     
     builder(set[Message] (Tree pt) {
       if (Form f := pt.args[1]) {

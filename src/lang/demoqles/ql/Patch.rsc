@@ -5,7 +5,7 @@ import lang::demoqles::ql::QL;
 import ParseTree;
 import IO;
 
-lrel[loc, str] patch(Form f, Env env) {
+lrel[loc, str] patch(Form f, Env env, bool visibility) {
   lrel[loc, str] p = [];
   hasInput = false;
   
@@ -47,14 +47,30 @@ lrel[loc, str] patch(Form f, Env env) {
       hasInput = true;
       
     case (Question)`if (<Expr c>) <Question q>`: {
-      println("Eval of condition: <c> = <eval(c, env)>");
-      toggleVisibility(q, true := eval(c, env)); 
+      if (visibility) {
+        println("Eval of condition: <c> = <eval(c, env)>");
+        toggleVisibility(q, true := eval(c, env));
+      } 
+    }
+    
+    case q:(Question)`(<Question* qs>)`: {
+      if (!visibility) {
+        l1 = q@\loc;
+        l1.length = 1;
+        p += [<l1, "{">];
+        l2 = q@\loc;
+        l2.offset += l2.length - 1;
+        l2.length = 1;
+        p += [<l2, "}">];
+      }
     }
 
     case (Question)`if (<Expr c>) <Question q1> else <Question q2>`: {
-      b = true := eval(c, env); 
-      toggleVisibility(q1, b);
-      toggleVisibility(q2, !b);
+      if (visibility) {
+        b = true := eval(c, env); 
+        toggleVisibility(q1, b);
+        toggleVisibility(q2, !b);
+      }
     } 
       
     case (Question)`<Label _> <Id x>: <Type _> = <Expr e>`: {

@@ -18,17 +18,17 @@
     <label for="hasMaintLoan_164">Did you enter a loan?</label>
     <input name="hasMaintLoan_164" id="hasMaintLoan_164" type="checkbox" data-bind="checked: hasMaintLoan_164" />
   </li>
-  <li data-bind="visible: sellingPrice_267_visible">
-    <label for="sellingPrice_267">What was the selling price?</label>
-    <input name="sellingPrice_267" id="sellingPrice_267" type="text" data-bind="value: sellingPrice_267" />
+  <li data-bind="visible: sellingPrice_268_visible">
+    <label for="sellingPrice_268">What was the selling price?</label>
+    <input name="sellingPrice_268" id="sellingPrice_268" type="text" data-bind="value: sellingPrice_268" />
   </li>
   <li data-bind="visible: privateDebt_336_visible">
     <label for="privateDebt_336">Private debts for the sold house:</label>
     <input name="privateDebt_336" id="privateDebt_336" type="text" data-bind="value: privateDebt_336" />
   </li>
-  <li data-bind="visible: valueResidue_408_visible">
-    <label for="valueResidue_408">Value residue:</label>
-    <input name="valueResidue_408" id="valueResidue_408" type="text" data-bind="value: valueResidue_408" />
+  <li data-bind="visible: valueResidue_410_visible">
+    <label for="valueResidue_410">Value residue:</label>
+    <input name="valueResidue_410" id="valueResidue_410" type="text" data-bind="value: valueResidue_410" />
   </li>
   
 </ul>
@@ -52,8 +52,8 @@
     console.log("Computing: true\n");
     return true;
   }, self, {deferEvaluation: true});
-  self.sellingPrice_267 = ko.observable(0.0);
-  self.sellingPrice_267_visible = ko.computed(function() {
+  self.sellingPrice_268 = ko.observable(0.0);
+  self.sellingPrice_268_visible = ko.computed(function() {
     console.log("Computing: true && hasSoldHouse\n");
     return true && self.hasSoldHouse_63();
   }, self, {deferEvaluation: true});
@@ -62,12 +62,12 @@
     console.log("Computing: true && hasSoldHouse\n");
     return true && self.hasSoldHouse_63();
   }, self, {deferEvaluation: true});
-  self.valueResidue_408 = ko.computed(function() {
+  self.valueResidue_410 = ko.computed(function() {
     console.log("Computing: (sellingPrice - privateDebt)\n");
-    return (self.sellingPrice_303() - self.privateDebt_378());
+    return (self.sellingPrice_304() - self.privateDebt_378());
   }, self, {deferEvaluation: true});
-  self.valueResidue_408_readonly = true;
-  self.valueResidue_408_visible = ko.computed(function() {
+  self.valueResidue_410_readonly = true;
+  self.valueResidue_410_visible = ko.computed(function() {
     console.log("Computing: true && hasSoldHouse\n");
     return true && self.hasSoldHouse_63();
   }, self, {deferEvaluation: true});
