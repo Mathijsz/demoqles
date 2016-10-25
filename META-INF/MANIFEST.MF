@@ -3,6 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: muql
 Bundle-SymbolicName: demoqles
 Bundle-Version: 1.0.0
-Require-Bundle: org.eclipse.imp.pdb.values,
+Require-Bundle: 
  rascal
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
