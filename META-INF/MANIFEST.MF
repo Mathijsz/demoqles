@@ -4,5 +4,5 @@ Bundle-Name: muql
 Bundle-SymbolicName: demoqles
 Bundle-Version: 1.0.0
 Require-Bundle: 
- rascal
+ rascal_eclipse
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
