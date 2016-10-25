@@ -7,6 +7,7 @@ import lang::demoqles::ql::Eval;
 import lang::demoqles::ql::Verify;
 import lang::demoqles::ql::Outline;
 import lang::demoqles::ql::Form2HTML;
+import lang::demoqles::ql::Form2Model;
 import lang::demoqles::ql::Patch;
 import lang::demoqles::qls::QLS;
 import lang::demoqles::qls::Check;
@@ -23,6 +24,8 @@ private str DEMO_QL ="DemoQL";
 private str DEMO_QLS ="DemoQLS";
 
 anno rel[loc, loc, str] Tree@hyperlinks;
+
+str ql2html(Form f, Info i) = form2html(f, i, form2items, form2model);
 
 public void setupQL() {
   bool doVisibility = false;
