@@ -3,6 +3,7 @@
 	<name>demoqles</name>
 	<comment></comment>
 	<projects>
+		<project>rls-project</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
